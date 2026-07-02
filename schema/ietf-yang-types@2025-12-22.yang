@@ -1,0 +1,69 @@
+module ietf-yang-types {
+  namespace "urn:ietf:params:xml:ns:yang:ietf-yang-types";
+  prefix yang;
+  organization "IETF Network Modeling (NETMOD) Working Group";
+  contact "WG Web: <https://datatracker.ietf.org/wg/netmod/>
+   WG List: <mailto:netmod@ietf.org>
+   Editor: Jürgen Schönwälder <mailto:jschoenwaelder@constructor.university>";
+  description "This module contains a collection of generally useful derived YANG data types.";
+  revision 2025-12-22 {
+    description "This revision adds date, date-no-zone, time, time-no-zone, hours32, minutes32, seconds32, centiseconds32, milliseconds32, microseconds32, microseconds64, nanoseconds32, nanoseconds64, language-tag. Aligned yang-identifier with YANG 1.1. Leap second support added. Time zone offsets aligned with RFC 9557.";
+    reference "RFC 9911: Common YANG Data Types";
+  }
+  revision 2013-07-15 {
+    description "Added yang-identifier, hex-string, uuid, dotted-quad.";
+    reference "RFC 6991: Common YANG Data Types";
+  }
+  revision 2010-09-24 {
+    description "Initial revision.";
+    reference "RFC 6021: Common YANG Data Types";
+  }
+
+  /* counter types */
+  typedef counter32 { type uint32; description "Non-negative integer that monotonically increases until 2^32-1 then wraps to zero. No defined initial value. Should not be used for configuration nodes."; reference "RFC 2578: SMIv2"; }
+  typedef zero-based-counter32 { type counter32; default "0"; description "Counter32 with defined initial value of zero."; reference "RFC 4502: RMON2-MIB"; }
+  typedef counter64 { type uint64; description "Non-negative integer that monotonically increases until 2^64-1 then wraps to zero."; reference "RFC 2578: SMIv2"; }
+  typedef zero-based-counter64 { type counter64; default "0"; description "Counter64 with defined initial value of zero."; reference "RFC 2856: HCNUM-TC"; }
+
+  /* gauge types */
+  typedef gauge32 { type uint32; description "Non-negative integer that may increase or decrease. Capped at 2^32-1 max and 0 min."; reference "RFC 2578: SMIv2"; }
+  typedef gauge64 { type uint64; description "Non-negative integer that may increase or decrease. Capped at 2^64-1 max and 0 min."; reference "RFC 2856: HCNUM-TC"; }
+
+  /* identifier types */
+  typedef object-identifier { type string { pattern '(([0-1](\.[1-3]?[0-9]))|(2\.(0|([1-9][0-9]*))))' + '(\.(0|([1-9][0-9]*)))*'; } description "Administratively assigned names in a registration-hierarchical-name tree. Sub-identifiers separated by single dots. First sub-id restricted to 0/1/2. Second sub-id max 39 if first is 0 or 1. At least two sub-identifiers required."; reference "ISO 9834-1"; }
+  typedef object-identifier-128 { type object-identifier { pattern '[0-9]*(\.[0-9]*){1,127}'; } description "Object-identifier restricted to 128 sub-identifiers. Equivalent to SMIv2 OBJECT IDENTIFIER."; reference "RFC 2578: SMIv2"; }
+
+  /* date and time types */
+  typedef date-and-time { type string { pattern '[0-9]{4}-(1[0-2]|0[1-9])-(0[1-9]|[1-2][0-9]|3[0-1])' + 'T(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)' + '(\.[0-9]+)?' + '(Z|[\+\-]((1[0-3]|0[0-9]):([0-5][0-9])|14:00))?'; } description "Profile of ISO 8601 per RFC 3339 date-time production, updated per RFC 9557. Seconds value of 60 allowed for leap seconds. No negative years. Z offset = UTC with unknown local timezone. +00:00 = UTC with known local timezone reference UTC."; reference "ISO 8601, RFC 3339, RFC 9557, XSD-TYPES"; }
+  typedef date { type string { pattern '[0-9]{4}-(1[0-2]|0[1-9])-(0[1-9]|[1-2][0-9]|3[0-1])' + '(Z|[\+\-]((1[0-3]|0[0-9]):([0-5][0-9])|14:00))?'; } description "Time-interval of 24 hours. Compatible with XML schema date type. No negative years."; reference "RFC 3339, RFC 9557, XSD-TYPES"; }
+  typedef date-no-zone { type date { pattern '[0-9]{4}-(1[0-2]|0[1-9])-(0[1-9]|[1-2][0-9]|3[0-1])'; } description "Date without optional time zone offset."; }
+  typedef time { type string { pattern '(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)' + '(\.[0-9]+)?' + '(Z|[\+\-]((1[0-3]|0[0-9]):([0-5][0-9])|14:00))?'; } description "Instance of time of zero duration recurring every day. 60 seconds for leap seconds. Compatible with XML schema time."; reference "RFC 3339, RFC 9557, XSD-TYPES"; }
+  typedef time-no-zone { type time { pattern '(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)' + '(\.[0-9]+)?'; } description "Time without optional time zone offset."; }
+
+  /* duration types */
+  typedef hours32 { type int32; units "hours"; description "Period measured in hours. Range -89478485 days to +89478485 days. Use range '0..max' for non-negative only."; }
+  typedef minutes32 { type int32; units "minutes"; description "Period measured in minutes. Range approx -1491308 days to +1491308 days."; }
+  typedef seconds32 { type int32; units "seconds"; description "Period measured in seconds. Range approx -24855 days to +24855 days."; }
+  typedef centiseconds32 { type int32; units "centiseconds"; description "Period measured in 10^-2 seconds. Range approx -248 days to +248 days. Equivalent to SMIv2 TimeInterval."; }
+  typedef milliseconds32 { type int32; units "milliseconds"; description "Period measured in 10^-3 seconds. Range approx -24 days to +24 days."; }
+  typedef microseconds32 { type int32; units "microseconds"; description "Period measured in 10^-6 seconds. Range approx -35 min to +35 min."; }
+  typedef microseconds64 { type int64; units "microseconds"; description "Period measured in 10^-6 seconds. Range approx -106751991 days to +106751991 days."; }
+  typedef nanoseconds32 { type int32; units "nanoseconds"; description "Period measured in 10^-9 seconds. Range approx -2 sec to +2 sec."; }
+  typedef nanoseconds64 { type int64; units "nanoseconds"; description "Period measured in 10^-9 seconds. Range approx -106753 days to +106752 days."; }
+
+  /* SNMP temporal types */
+  typedef timeticks { type uint32; description "Non-negative integer representing time modulo 2^32 in hundredths of a second between two epochs."; reference "RFC 2578: SMIv2"; }
+  typedef timestamp { type timeticks; description "Value of associated timeticks at a specific occurrence. Zero if occurrence predates last timeticks wrap."; reference "RFC 2579: SNMPv2-TC"; }
+
+  /* address types */
+  typedef phys-address { type string { pattern '([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?'; } description "Media/physical address as hex octets separated by colons. Canonical lowercase."; reference "RFC 2579: SNMPv2-TC"; }
+  typedef mac-address { type string { pattern '[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}'; } description "48-bit IEEE 802 MAC address. Canonical lowercase. For non-48-bit addresses use phys-address."; reference "IEEE 802, RFC 2579"; }
+
+  /* string types */
+  typedef xpath1.0 { type string; description "XPATH 1.0 expression. Using node must specify XPath context."; reference "XPATH: XML Path Language 1.0"; }
+  typedef hex-string { type string { pattern '([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?'; } description "Hex string with octets as hex digits separated by colons. Canonical lowercase."; }
+  typedef uuid { type string { pattern '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'; } description "UUID in string representation per RFC 9562. Canonical lowercase."; reference "RFC 9562"; }
+  typedef dotted-quad { type string { pattern '(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}' + '([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])'; } description "Unsigned 32-bit number in dotted-quad notation (four octets)."; }
+  typedef language-tag { type string; description "Language tag per RFC 5646 (BCP 47). Canonical lowercase."; reference "RFC 5646, RFC 5131"; }
+  typedef yang-identifier { type string { length "1..max"; pattern '[a-zA-Z_][a-zA-Z0-9\-_.]*'; } description "YANG identifier per RFC 7950 Section 14. Starts with alpha/underscore, followed by alphanumeric/underscore/hyphen/dot."; reference "RFC 7950, RFC 6991, RFC 6020"; }
+}
