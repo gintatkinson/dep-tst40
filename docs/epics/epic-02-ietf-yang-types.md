@@ -110,15 +110,33 @@ classDiagram
     IetfYangTypes *-- StringGroup
     IetfYangTypes *-- SnmpGroup
 
-    class MonitoringApplication { <<service>> }
-    class DeltaCalculator { <<service>> }
-    class EventRecorder { <<service>> }
-    class ProtocolTranslator { <<service>> }
-    class YANGTypeRegistry { <<service>> }
-    class SMIv2TypeRegistry { <<service>> }
-    class TemporalClient { <<service>> }
-    class TemporalValidator { <<service>> }
-    class DateTimeParser { <<service>> }
+    class MonitoringApplication
+    class DeltaCalculator {
+        +computeDelta(prevValue : Integer, currValue : Integer) : Integer [1]
+    }
+    class EventRecorder
+    class ProtocolTranslator
+    class YANGTypeRegistry {
+        +resolveType(typeName : String) : TypeDefinition [1]
+    }
+    class SMIv2TypeRegistry {
+        +getEquivalent(yangTypeDef : TypeDefinition) : TypeDefinition [1]
+    }
+    class TemporalClient
+    class TemporalValidator {
+        +validateDateTime(value : String, typeName : String) : Boolean [1]
+        +checkLeapSecond(parsedDate : ParsedDateTime) : Boolean [1]
+    }
+    class DateTimeParser {
+        +parseISO8601(value : String) : ParsedDateTime [1]
+    }
+    MonitoringApplication --> Counter64 : polls
+    DeltaCalculator --> Counter32 : computes delta
+    EventRecorder --> TimeStamp : records
+    ProtocolTranslator --> YANGTypeRegistry : resolves
+    ProtocolTranslator --> SMIv2TypeRegistry : maps
+    TemporalClient --> TemporalValidator : validates
+    TemporalValidator --> DateTimeParser : parses
 ```
 
 ### System State Machine Diagram
