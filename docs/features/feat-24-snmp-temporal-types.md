@@ -25,6 +25,7 @@ classDiagram
         +wrapsAt : String [1]
         +requiresReferenceEpochs : Boolean [1]
         +smiEquivalent : String [1]
+        +readCurrent() : Integer [1]
     }
     class TimeStamp {
         +baseType : String [1]
@@ -32,6 +33,7 @@ classDiagram
         +zeroOnWrap : Boolean [1]
         +zeroOnPredatingEvent : Boolean [1]
         +smiEquivalent : String [1]
+        +recordEvent(currentTicks : Integer) : Integer [1]
     }
     TimeTicks <|-- TimeStamp
 ```

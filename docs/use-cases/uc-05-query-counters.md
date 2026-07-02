@@ -52,6 +52,26 @@ A network operator needs to compute packet-per-second rates on a network interfa
   2. System discards the calculation as unreliable
   3. System notifies NetworkOperator: "RATE_UNRELIABLE: Polling interval too long, counter may have wrapped multiple times"
 
+- **5d. counter32 Wrap at 2^32 (Branches from step 7):**
+  1. System detects counter32 value wrapped from 4294967295 to 0
+  2. System computes wrap-aware delta for 32-bit counter
+  3. System logs the smaller wrap window (497 days at centisecond rate) for operator awareness
+
+- **5e. Multiple Wrap Detection (Branches from step 10):**
+  1. System detects counter delta exceeds 2^64 (more than one wrap occurred)
+  2. System cannot determine exact wrap count
+  3. System discards the result and notifies NetworkOperator: "MULTIPLE_WRAPS: Counter wrapped more than once, delta unreliable"
+
+- **5f. SNMP Manager Polling (Branches from step 1):**
+  1. SNMPManager queries the same counter via SMIv2-equivalent Counter64 OID
+  2. System validates SMIv2 Counter64 value against YANG counter64 semantics
+  3. System returns identical value if within range, or flags mapping failure if type mismatch
+
+- **5g. Gauge Saturation Detection (Branches from step 2):**
+  1. System detects a gauge64 value latched at maximum (2^64-1)
+  2. System cannot determine actual modeled value above max
+  3. System returns warning: "GAUGE_SATURATED: Value at maximum, actual value may be higher"
+
 ## 6. Postconditions
 - **Success Guarantee:** A validated packets-per-second rate is computed from two counter64 readings with correct wrap handling and reported to the operator.
 - **Failure Guarantee:** No rate is reported. The operator is notified of the limitation (too few samples, excessive interval, counter re-initialization).

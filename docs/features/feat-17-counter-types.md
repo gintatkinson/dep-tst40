@@ -23,6 +23,7 @@ classDiagram
         +maxValue : Integer [1]
         +hasInitialValue : Boolean [1]
         +wrapsAtMax : Boolean [1]
+        +readValue() : Integer [1]
     }
     class ZeroBasedCounter32 {
         +baseType : String [1]

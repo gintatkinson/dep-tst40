@@ -62,6 +62,11 @@ A provisioning system needs to configure a device with a UUID, MAC address, dott
   2. System rejects the configuration
   3. System returns error "INVALID_YANG_IDENTIFIER: Must start with alpha/underscore, followed by alphanumeric/underscore/hyphen/dot chars"
 
+- **5f. YANG 1 XML Prefix Restriction (Branches from step 8):**
+  1. System detects the YANG module uses YANG version 1 (RFC 6020)
+  2. System checks yang-identifier does not start with any case combination of 'xml'
+  3. If identifier starts with 'xml' (any case), system rejects with error "INVALID_YANG_IDENTIFIER: Identifiers starting with 'xml' are reserved in YANG 1"
+
 ## 6. Postconditions
 - **Success Guarantee:** Configuration is committed with all type-constrained values validated. The running datastore contains correctly formatted UUID, MAC address, dotted-quad, language tag, and YANG identifier values.
 - **Failure Guarantee:** Configuration is rejected in its entirety. The running datastore is unchanged. A type-specific error message is returned to the ProvisioningSystem.

@@ -109,6 +109,16 @@ classDiagram
     IetfYangTypes *-- AddressGroup
     IetfYangTypes *-- StringGroup
     IetfYangTypes *-- SnmpGroup
+
+    class MonitoringApplication { <<service>> }
+    class DeltaCalculator { <<service>> }
+    class EventRecorder { <<service>> }
+    class ProtocolTranslator { <<service>> }
+    class YANGTypeRegistry { <<service>> }
+    class SMIv2TypeRegistry { <<service>> }
+    class TemporalClient { <<service>> }
+    class TemporalValidator { <<service>> }
+    class DateTimeParser { <<service>> }
 ```
 
 ### System State Machine Diagram
