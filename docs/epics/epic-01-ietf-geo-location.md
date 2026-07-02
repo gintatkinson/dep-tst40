@@ -91,6 +91,20 @@ classDiagram
     LocationChoice <|-- CartesianLocation
     GeoLocation *-- Velocity
 
+    MotionTrackingService --> Velocity : uses
+    MotionTrackingService --> SpeedHeadingCalculator : delegates to
+    GeoLocationRegistry --> GeoLocation : manages
+    GeoLocationRegistry --> SystemClock : queries
+    LocationDataConsumer --> GeoLocationRegistry : queries
+    LocationHierarchyManager --> GeoLocation : manages hierarchy
+    LocationExporter --> GeoLocation : reads
+    LocationExporter --> GeoUriBuilder : delegates to
+    FormatMapper --> GeoLocation : reads
+    FormatMapper --> W3CGeolocationAdapter : delegates W3C
+    FormatMapper --> GMLPositionAdapter : delegates GML
+    FormatMapper --> SpeedHeadingCalculator : computes speed/heading
+    W3CGeolocationAdapter --> SpeedHeadingCalculator : computes speed/heading
+
     class MotionTrackingService {
         <<service>>
         +computeSpeed(vNorth : Real, vEast : Real) : Real [1]
@@ -137,7 +151,7 @@ classDiagram
     }
 ```
 
-### System State Machine Definition
+### System State Machine Diagram
 ```mermaid
 stateDiagram-v2
     [*] --> Unconfigured

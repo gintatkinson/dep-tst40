@@ -22,6 +22,10 @@ classDiagram
         +String astronomicalBody [1]
         +getGeodeticSystem() : GeodeticSystem [1]
     }
+    class GeoLocation {
+        <<container>>
+        +getGeodeticSystem() : GeodeticSystem [1]
+    }
     class GeodeticSystem {
         +String geodeticDatum [0..1]
         +Real coordAccuracy [0..1]
