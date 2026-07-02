@@ -14,7 +14,7 @@ The IETF has standardized a YANG grouping for specifying geographic locations on
 This Epic covers the complete structural extraction of all container, leaf, choice, and case nodes defined in the `ietf-geo-location@2022-02-11.yang` schema, translating them into platform-independent, implementation-ready Agile feature specifications.
 
 ## 2. Requirements & Checklist
-- [ ] #1 - [Configure Reference Frame](https://github.com/gintatkinson/dep-tst40/blob/main/docs/features/feat-01-reference-frame.md) (Foundational container for frame of reference: astronomical body selection and alternate system support)
+- [x] #1 - [Configure Reference Frame](https://github.com/gintatkinson/dep-tst40/blob/main/docs/features/feat-01-reference-frame.md) (Foundational container for frame of reference: astronomical body selection and alternate system support)
 - [ ] #2 - [Configure Geodetic System](https://github.com/gintatkinson/dep-tst40/blob/main/docs/features/feat-02-geodetic-system.md) (Defines coordinate meaning via geodetic-datum and accuracy parameters)
 - [ ] #3 - [Specify Ellipsoid Location Coordinates](https://github.com/gintatkinson/dep-tst40/blob/main/docs/features/feat-03-ellipsoid-location.md) (Latitude/longitude/height coordinate capture with ISO 6709:2008 conformance)
 - [ ] #4 - [Specify Cartesian Location Coordinates](https://github.com/gintatkinson/dep-tst40/blob/main/docs/features/feat-04-cartesian-location.md) (X/Y/Z Cartesian coordinate capture, mutually exclusive with ellipsoid)
