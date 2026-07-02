@@ -130,13 +130,14 @@ classDiagram
     class DateTimeParser {
         +parseISO8601(value : String) : ParsedDateTime [1]
     }
-    MonitoringApplication --> Counter64 : polls
-    DeltaCalculator --> Counter32 : computes delta
-    EventRecorder --> TimeStamp : records
+    MonitoringApplication --> CounterGroup : polls
+    DeltaCalculator --> CounterGroup : computes delta
+    EventRecorder --> SnmpGroup : records timestamps
     ProtocolTranslator --> YANGTypeRegistry : resolves
     ProtocolTranslator --> SMIv2TypeRegistry : maps
     TemporalClient --> TemporalValidator : validates
     TemporalValidator --> DateTimeParser : parses
+    TemporalClient --> DateTimeGroup : validates against
 ```
 
 ### System State Machine Diagram
