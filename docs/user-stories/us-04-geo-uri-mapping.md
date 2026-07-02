@@ -36,7 +36,7 @@ sequenceDiagram
 
     exporter->>location: getEllipsoidLocation()
     location->>ellipsoid: getCoordinates()
-    ellipsoid-->location: (latitude : Real, longitude : Real, height : Real)
+    ellipsoid-->location: latitude : Real, longitude : Real, height : Real
     location-->exporter: ellipsoidCoords : EllipsoidCoordinates
 
     exporter->>location: getGeodeticSystem()
@@ -44,7 +44,7 @@ sequenceDiagram
     geodetic-->location: datum : String
     location->>geodetic: getCoordAccuracy()
     geodetic-->location: accuracy : Real
-    location-->exporter: (datum : String, accuracy : Real)
+    location-->exporter: datum : String, accuracy : Real
 
     exporter->>uriBuilder: build(latitude : Real, longitude : Real, datum : String, accuracy : Real, height : Real)
     

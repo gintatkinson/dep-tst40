@@ -35,16 +35,16 @@ sequenceDiagram
 
     consumer->>registry: getLocation(locationId : String)
     registry->>location: getTemporalMetadata()
-    location-->registry: (timestamp : String, validUntil : String)
+    location-->registry: timestamp : String, validUntil : String
 
     registry->>clock: getCurrentTime()
     clock-->registry: currentTime : String
 
     alt [validUntil !== null && currentTime > validUntil]
-        registry-->consumer: status : Status (EXPIRED)
+        registry-->consumer: status : EXPIRED
         Note over registry: Location data is stale
     else [validUntil === null || currentTime <= validUntil]
-        registry-->consumer: status : Status (ACTIVE)
+        registry-->consumer: status : ACTIVE
         Note over registry: Location data is current
     end
 ```

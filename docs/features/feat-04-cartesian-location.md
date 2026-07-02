@@ -10,7 +10,7 @@ spec_source: "RFC 9179"
 # Feature: Specify Cartesian Location Coordinates
 
 ## Parent Epic
-- [ ] #[EpicIssueID] - [Epic Title](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-01-ietf-geo-location.md) (The Cartesian location is one of two mutually exclusive coordinate forms within the location choice)
+- [ ] #7 - [ietf-geo-location: Geographic Location](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-01-ietf-geo-location.md) (The Cartesian location is one of two mutually exclusive coordinate forms within the location choice)
 
 ## Description
 This feature allows the specification of a geographic position using Cartesian (X, Y, Z) coordinates in fractions of meters. The Cartesian location is one alternative within the mutually exclusive `location` choice — the other being ellipsoidal (latitude/longitude/height). The exact semantic meaning of the X, Y, and Z values, including origin and axis orientation, is determined by the `reference-frame` context in which the coordinates are used. All three values share the same decimal precision: six fractional digits. This feature defines the validation rules, payload schema, logical operations, and error states for the Cartesian coordinate representation.
@@ -22,9 +22,8 @@ classDiagram
     class GeoLocation {
         +LocationChoice location [1]
     }
-    class LocationChoice {
-        <<choice>>
-    }
+    class LocationChoice
+    <<choice>> LocationChoice
     class EllipsoidLocation {
         +Real latitude [1]
         +Real longitude [1]

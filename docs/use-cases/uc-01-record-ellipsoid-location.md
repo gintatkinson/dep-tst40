@@ -78,7 +78,7 @@ graph TD
     end
     Admin((SystemAdministrator)) --- UC
     UC -. "<<include>>" .-> UC_Config
-    UC -. "<<extend>>" .-> UC_Port
+    UC_Port -. "<<extend>>" .-> UC
     UC --- NMS((NetworkManagementSystem))
 ```
 

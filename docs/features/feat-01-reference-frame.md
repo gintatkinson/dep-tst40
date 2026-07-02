@@ -20,11 +20,14 @@ The Reference Frame defines the coordinate system in which all geolocation value
 classDiagram
     class GeoLocation {
         <<container>>
+        +getReferenceFrame() : ReferenceFrame [1]
     }
     class ReferenceFrame {
         <<container>>
-        +astronomicalBody : String = "earth"
+        +astronomicalBody : String [1]
         +alternateSystem : String [0..1]
+        +getAstronomicalBody() : String [1]
+        +getGeodeticSystem() : GeodeticSystem [1]
     }
     GeoLocation "1" *-- "1" ReferenceFrame : contains
 ```

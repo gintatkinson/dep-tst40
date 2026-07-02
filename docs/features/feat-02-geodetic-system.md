@@ -10,7 +10,7 @@ spec_source: "RFC 9179"
 # Feature: Configure Geodetic System
 
 ## Parent Epic
-- [ ] #[EpicIssueID] - [Epic Title](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-01-ietf-geo-location.md) (Geodetic system defines the coordinate meaning, accuracy, and height reference within the reference frame)
+- [ ] #7 - [ietf-geo-location: Geographic Location](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-01-ietf-geo-location.md) (Geodetic system defines the coordinate meaning, accuracy, and height reference within the reference frame)
 
 ## Description
 Configures the geodetic system for a location's reference frame. The geodetic system defines how latitude, longitude, and height coordinates are interpreted by specifying a geodetic-datum. It also captures the precision of those coordinates (coord-accuracy) and the precision of height measurements (height-accuracy). When the astronomical body is earth and no geodetic-datum is supplied, the system defaults to WGS-84, the datum used by GPS. Valid geodetic-datum values are drawn from the IANA "Geodetic System Values" registry, which enforces lowercase conversion and space-to-dash normalization on all registered values.
@@ -19,12 +19,14 @@ Configures the geodetic system for a location's reference frame. The geodetic sy
 ```mermaid
 classDiagram
     class ReferenceFrame {
-        +String astronomicalBody
+        +String astronomicalBody [1]
     }
     class GeodeticSystem {
-        +String geodeticDatum
-        +Decimal64 coordAccuracy
-        +Decimal64 heightAccuracy
+        +String geodeticDatum [0..1]
+        +Real coordAccuracy [0..1]
+        +Real heightAccuracy [0..1]
+        +getDatum() : String [1]
+        +getCoordAccuracy() : Real [1]
     }
     note for GeodeticSystem "geodeticDatum: pattern '[ -@\\[-\\^_-~]*', default 'wgs-84' when astronomicalBody = 'earth'\ncoordAccuracy: decimal64 fraction-digits 6\nheightAccuracy: decimal64 fraction-digits 6, units meters, not used with Cartesian coordinates"
     ReferenceFrame *-- "0..1" GeodeticSystem : contains

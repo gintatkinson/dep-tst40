@@ -35,8 +35,8 @@ sequenceDiagram
 
     motionService->>geoLocation: getVelocity()
     geoLocation->>velocity: getComponents()
-    velocity-->geoLocation: (vNorth, vEast) : (Real, Real)
-    geoLocation-->motionService: (vNorth : Real, vEast : Real)
+    velocity-->geoLocation: vNorth : Real, vEast : Real
+    geoLocation-->motionService: vNorth : Real, vEast : Real
 
     motionService->>calculator: computeSpeed(vNorth : Real, vEast : Real)
     calculator-->motionService: speed : Real

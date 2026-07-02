@@ -20,12 +20,14 @@ The velocity container captures the three-dimensional motion of an object at the
 classDiagram
     class GeoLocation {
         <<container>>
+        +getVelocity() : Velocity [1]
     }
     class Velocity {
         <<container>>
         +vNorth : Real [0..1]
         +vEast : Real [0..1]
         +vUp : Real [0..1]
+        +getComponents() : VelocityComponents [1]
     }
     GeoLocation "1" *-- "0..1" Velocity : contains
 

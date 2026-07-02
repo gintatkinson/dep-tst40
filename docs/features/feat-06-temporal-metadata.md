@@ -19,11 +19,9 @@ The temporal metadata feature records when a location measurement was taken and,
 ```mermaid
 classDiagram
     class GeoLocation {
-        ~~container~~
-        +timestamp : String
-        +validUntil : String [0..1]
+        +String timestamp [1]
+        +String validUntil [0..1]
     }
-    GeoLocation "1" *-- "1" GeoLocation : contains
 ```
 
 ## Interface Requirements

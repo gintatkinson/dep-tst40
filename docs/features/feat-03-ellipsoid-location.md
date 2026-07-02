@@ -10,7 +10,7 @@ spec_source: "RFC 9179"
 # Feature: Specify Ellipsoid Location Coordinates
 
 ## Parent Epic
-- [ ] #[EpicIssueID] - [IETF Geo-Location Module](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-01-ietf-geo-location.md) (The ellipsoid location is one of two mutually exclusive coordinate forms within the location choice)
+- [ ] #7 - [ietf-geo-location: Geographic Location](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-01-ietf-geo-location.md) (The ellipsoid location is one of two mutually exclusive coordinate forms within the location choice)
 
 ## Description
 This feature defines ellipsoid (geodetic) coordinate specification on, or relative to, an astronomical body. It provides three coordinate values: latitude and longitude expressed as decimal degrees with 16 fractional digits of precision, and an optional height expressed in meters with 6 fractional digits. The ellipsoid location is one of two mutually exclusive coordinate forms within a `location` choice — the other being Cartesian coordinates (`x`, `y`, `z`). The exact meaning and reference datum for all values is defined by the associated `reference-frame` and `geodetic-datum` parameters, ensuring the coordinate system's origin, orientation, and zero-height surface are unambiguously established.
@@ -19,17 +19,18 @@ This feature defines ellipsoid (geodetic) coordinate specification on, or relati
 ```mermaid
 classDiagram
     class GeoLocation {
-        +referenceFrame : String [1]
-        +geodeticDatum : String [1]
-        +location : LocationChoice [1]
+        +String referenceFrame [1]
+        +String geodeticDatum [1]
+        +LocationChoice location [1]
+        +getEllipsoidLocation() : EllipsoidCoordinates [1]
     }
-    class LocationChoice {
-        &lt;&lt;choice&gt;&gt;
-    }
+    class LocationChoice
+    <<choice>> LocationChoice
     class EllipsoidLocation {
-        +latitude : Real [1]
-        +longitude : Real [1]
-        +height : Real [0..1]
+        +Real latitude [1]
+        +Real longitude [1]
+        +Real height [0..1]
+        +getCoordinates() : EllipsoidCoordinates [1]
     }
     class CartesianLocation {
         +x : Real [1]
