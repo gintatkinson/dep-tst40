@@ -24,7 +24,10 @@ This Epic covers the complete structural extraction of all container, leaf, choi
 ### Associated Use Cases & User Stories
 
 #### Associated Use Cases
-*(To be linked after Phase 3 execution)*
+- [ ] #13 - [Record Geographic Location Using Ellipsoid Coordinates](https://github.com/gintatkinson/dep-tst40/blob/main/docs/use-cases/uc-01-record-ellipsoid-location.md) (Primary deployment scenario for Earth-based geolocation with ISO 6709:2008 conformance)
+- [ ] #14 - [Record Geographic Location Using Cartesian Coordinates](https://github.com/gintatkinson/dep-tst40/blob/main/docs/use-cases/uc-02-record-cartesian-location.md) (Non-Earth and virtual reality coordinate system deployment scenario)
+- [ ] #15 - [Track Object Motion Using Velocity Vector](https://github.com/gintatkinson/dep-tst40/blob/main/docs/use-cases/uc-03-track-object-motion.md) (Motion tracking with speed/heading derivation and continental drift analysis)
+- [ ] #16 - [Export Geolocation to External Portability Formats](https://github.com/gintatkinson/dep-tst40/blob/main/docs/use-cases/uc-04-export-location-formats.md) (Format export to IETF geo: URI, W3C, OGC GML, and Google KML standards)
 
 #### Associated User Stories
 - [ ] #8 - [Derive Speed and Heading from Velocity Vector](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-01-derive-speed-heading.md) (Calculates 2D speed and heading from v-north/v-east velocity components using RFC 9179 formulas)
