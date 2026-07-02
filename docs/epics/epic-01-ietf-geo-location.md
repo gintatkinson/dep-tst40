@@ -27,7 +27,11 @@ This Epic covers the complete structural extraction of all container, leaf, choi
 *(To be linked after Phase 3 execution)*
 
 #### Associated User Stories
-*(To be linked after Phase 2 execution)*
+- [ ] #8 - [Derive Speed and Heading from Velocity Vector](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-01-derive-speed-heading.md) (Calculates 2D speed and heading from v-north/v-east velocity components using RFC 9179 formulas)
+- [ ] #9 - [Manage Location Data Temporal Lifecycle](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-02-temporal-lifecycle.md) (Manages validity windows and expiration detection using timestamp and valid-until)
+- [ ] #10 - [Inherit Reference Frame in Nested Locations](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-03-nested-reference-frame.md) (Enables hierarchical reference-frame inheritance for nested location containers)
+- [ ] #11 - [Export Geolocation to IETF geo: URI Format](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-04-geo-uri-mapping.md) (Maps YANG geolocation to RFC 5870 geo: URI format for URI-based interoperability)
+- [ ] #12 - [Export Geolocation to W3C, GML, and KML Portability Formats](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-05-portability-formats.md) (Maps YANG geolocation to W3C, OGC GML, and Google KML standard portability formats)
 
 ## 3. Architecture and System Interaction Diagrams
 
