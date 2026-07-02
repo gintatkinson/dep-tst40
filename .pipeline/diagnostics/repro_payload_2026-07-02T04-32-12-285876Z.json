@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-07-02T04:32:12.285876Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "skills/spec-orchestrator/scripts/verify_model_coverage.py schema docs/features",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/dep-tst40.git",
+    "commit_hash": "a4cddd484bb69f6494d9eade50ea95c1df0efa7f"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "User Story us-06-counter-wrap-detection.md sequence diagram message 'app->>deltaCalc: computeDelta(prevValue : Integer, currValue : Integer)' calls operation 'computeDelta' which is not defined on class 'DeltaCalculator' in any class diagram.",
+      "User Story us-09-smiv2-mapping.md sequence diagram message 'translator->>yangType: resolveType(typeName : String)' calls operation 'resolveType' which is not defined on class 'YANGTypeRegistry' in any class diagram.",
+      "User Story us-09-smiv2-mapping.md sequence diagram message 'translator->>smiType: getEquivalent(yangTypeDef : TypeDefinition)' calls operation 'getEquivalent' which is not defined on class 'SMIv2TypeRegistry' in any class diagram.",
+      "User Story us-07-datetime-validation.md sequence diagram message 'client->>validator: validateDateTime(value : String, typeName : String)' calls operation 'validateDateTime' which is not defined on class 'TemporalValidator' in any class diagram.",
+      "User Story us-07-datetime-validation.md sequence diagram message 'validator->>parser: parseISO8601(value : String)' calls operation 'parseISO8601' which is not defined on class 'DateTimeParser' in any class diagram.",
+      "User Story us-07-datetime-validation.md sequence diagram message 'validator->>validator: checkLeapSecond(parsedDate : ParsedDateTime)' calls operation 'checkLeapSecond' which is not defined on class 'TemporalValidator' in any class diagram.",
+      "Epic epic-02-ietf-yang-types.md contains class 'MonitoringApplication' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-02-ietf-yang-types.md contains class 'DeltaCalculator' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-02-ietf-yang-types.md contains class 'EventRecorder' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-02-ietf-yang-types.md contains class 'ProtocolTranslator' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-02-ietf-yang-types.md contains class 'YANGTypeRegistry' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-02-ietf-yang-types.md contains class 'SMIv2TypeRegistry' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-02-ietf-yang-types.md contains class 'TemporalClient' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-02-ietf-yang-types.md contains class 'TemporalValidator' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-02-ietf-yang-types.md contains class 'DateTimeParser' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-02-ietf-yang-types.md contains a disconnected UML Class Diagram. Classes ['SMIv2TypeRegistry', 'YANGTypeRegistry', 'DateTimeParser', 'EventRecorder', 'MonitoringApplication', 'ProtocolTranslator', 'DeltaCalculator', 'TemporalValidator', 'TemporalClient'] are not structurally connected to 'IetfYangTypes'.",
+      "Schema Mapping: Codebase is empty. No source files found for validation.",
+      "Profile Compliance: Codebase is empty. No source files found for profile validation.",
+      "Test Completeness: No test files found in the workspace."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}

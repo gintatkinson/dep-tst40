@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-07-02T04:32:36.884721Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "skills/spec-orchestrator/scripts/verify_model_coverage.py schema docs/features",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/dep-tst40.git",
+    "commit_hash": "10c398fdc3cc5778e43cb8231159c5f9139e5d0a"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "Epic epic-02-ietf-yang-types.md contains a disconnected UML Class Diagram. Classes ['EventRecorder', 'TimeStamp', 'DateTimeParser', 'Counter64', 'YANGTypeRegistry', 'SMIv2TypeRegistry', 'DeltaCalculator', 'TemporalValidator', 'ProtocolTranslator', 'Counter32', 'MonitoringApplication', 'TemporalClient'] are not structurally connected to 'IetfYangTypes'.",
+      "Schema Mapping: Codebase is empty. No source files found for validation.",
+      "Profile Compliance: Codebase is empty. No source files found for profile validation.",
+      "Test Completeness: No test files found in the workspace."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}

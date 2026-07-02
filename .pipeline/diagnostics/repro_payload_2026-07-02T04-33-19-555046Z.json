@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-07-02T04:33:19.555046Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "skills/spec-orchestrator/scripts/verify_model_coverage.py schema docs/features",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/dep-tst40.git",
+    "commit_hash": "439c840c5d7b3be4af557788e9be4a96e6289464"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "Schema Mapping: Codebase is empty. No source files found for validation.",
+      "Profile Compliance: Codebase is empty. No source files found for profile validation.",
+      "Test Completeness: No test files found in the workspace."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}

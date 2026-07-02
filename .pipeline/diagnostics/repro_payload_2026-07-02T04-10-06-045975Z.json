@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-07-02T04:10:06.045975Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "skills/spec-orchestrator/scripts/verify_model_coverage.py schema docs/features",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/dep-tst40.git",
+    "commit_hash": "2c2e10460fdb535e29175bb5f31bed6202ce1875"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "User Story us-04-geo-uri-mapping.md sequence diagram message 'exporter->>location: getGeodeticSystem()' calls operation 'getGeodeticSystem' which is not defined on class 'GeoLocation' in any class diagram.",
+      "Epic epic-01-ietf-geo-location.md is missing section '## System State Machine Diagram'.",
+      "Epic epic-01-ietf-geo-location.md contains class 'MotionTrackingService' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-01-ietf-geo-location.md contains class 'SpeedHeadingCalculator' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-01-ietf-geo-location.md contains class 'LocationDataConsumer' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-01-ietf-geo-location.md contains class 'GeoLocationRegistry' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-01-ietf-geo-location.md contains class 'SystemClock' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-01-ietf-geo-location.md contains class 'LocationHierarchyManager' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-01-ietf-geo-location.md contains class 'LocationExporter' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-01-ietf-geo-location.md contains class 'GeoUriBuilder' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-01-ietf-geo-location.md contains class 'FormatMapper' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-01-ietf-geo-location.md contains class 'W3CGeolocationAdapter' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-01-ietf-geo-location.md contains class 'GMLPositionAdapter' with zero relationships. Isolated classes are prohibited.",
+      "Epic epic-01-ietf-geo-location.md contains a disconnected UML Class Diagram. Classes ['SpeedHeadingCalculator', 'LocationExporter', 'LocationDataConsumer', 'SystemClock', 'FormatMapper', 'MotionTrackingService', 'GeoUriBuilder', 'W3CGeolocationAdapter', 'GeoLocationRegistry', 'LocationHierarchyManager', 'GMLPositionAdapter'] are not structurally connected to 'GeoLocationSubsystem'.",
+      "Schema Mapping: Codebase is empty. No source files found for validation.",
+      "Profile Compliance: Codebase is empty. No source files found for profile validation.",
+      "Test Completeness: No test files found in the workspace."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}

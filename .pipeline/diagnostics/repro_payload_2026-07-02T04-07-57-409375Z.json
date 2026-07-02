@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-07-02T04:07:57.409375Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "skills/spec-orchestrator/scripts/verify_model_coverage.py schema docs/features",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/dep-tst40.git",
+    "commit_hash": "348615271de00cfd9a6c03d7617037b87d8f8a36"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "Feature feat-06-temporal-metadata.md contains a UML Class Diagram with no relationships. Isolated classes are prohibited; you must illustrate containment/inheritance/choice composition.",
+      "Feature feat-06-temporal-metadata.md contains class 'GeoLocation' with zero relationships. Isolated classes are prohibited.",
+      "User Story us-02-temporal-lifecycle.md sequence diagram lifeline 'consumer' specifies classifier 'LocationDataConsumer' which is not defined in any feature class diagram.",
+      "User Story us-02-temporal-lifecycle.md sequence diagram lifeline 'registry' specifies classifier 'GeoLocationRegistry' which is not defined in any feature class diagram.",
+      "User Story us-02-temporal-lifecycle.md sequence diagram lifeline 'clock' specifies classifier 'SystemClock' which is not defined in any feature class diagram.",
+      "User Story us-02-temporal-lifecycle.md sequence diagram message 'registry->>location: getTemporalMetadata()' calls operation 'getTemporalMetadata' which is not defined on class 'GeoLocation' in any class diagram.",
+      "User Story us-05-portability-formats.md sequence diagram lifeline 'mapper' specifies classifier 'FormatMapper' which is not defined in any feature class diagram.",
+      "User Story us-05-portability-formats.md sequence diagram lifeline 'w3cAdapter' specifies classifier 'W3CGeolocationAdapter' which is not defined in any feature class diagram.",
+      "User Story us-05-portability-formats.md sequence diagram lifeline 'gmlAdapter' specifies classifier 'GMLPositionAdapter' which is not defined in any feature class diagram.",
+      "User Story us-05-portability-formats.md sequence diagram lifeline 'calculator' specifies classifier 'SpeedHeadingCalculator' which is not defined in any feature class diagram.",
+      "User Story us-05-portability-formats.md sequence diagram message 'mapper->>location: getFullLocation()' calls operation 'getFullLocation' which is not defined on class 'GeoLocation' in any class diagram.",
+      "User Story us-03-nested-reference-frame.md sequence diagram lifeline 'hierarchyManager' specifies classifier 'LocationHierarchyManager' which is not defined in any feature class diagram.",
+      "User Story us-03-nested-reference-frame.md sequence diagram message 'hierarchyManager->>childLocation: getEffectiveReferenceFrame()' calls operation 'getEffectiveReferenceFrame' which is not defined on class 'GeoLocation' in any class diagram.",
+      "User Story us-03-nested-reference-frame.md sequence diagram message 'childLocation->>childLocation: hasOwnReferenceFrame()' calls operation 'hasOwnReferenceFrame' which is not defined on class 'GeoLocation' in any class diagram.",
+      "User Story us-01-derive-speed-heading.md sequence diagram lifeline 'motionService' specifies classifier 'MotionTrackingService' which is not defined in any feature class diagram.",
+      "User Story us-01-derive-speed-heading.md sequence diagram lifeline 'calculator' specifies classifier 'SpeedHeadingCalculator' which is not defined in any feature class diagram.",
+      "User Story us-04-geo-uri-mapping.md sequence diagram lifeline 'exporter' specifies classifier 'LocationExporter' which is not defined in any feature class diagram.",
+      "User Story us-04-geo-uri-mapping.md sequence diagram lifeline 'uriBuilder' specifies classifier 'GeoUriBuilder' which is not defined in any feature class diagram.",
+      "User Story us-04-geo-uri-mapping.md sequence diagram message 'exporter->>location: getGeodeticSystem()' calls operation 'getGeodeticSystem' which is not defined on class 'GeoLocation' in any class diagram.",
+      "Use Case uc-04-export-location-formats.md must contain at least 14 detailed Alternate/Exception flows. Found only 6 flows. (Referenced features define 14 schema validation constraints, requiring at least that many alternate flows, with a minimum floor of 2.)",
+      "Use Case uc-02-record-cartesian-location.md must contain at least 12 detailed Alternate/Exception flows. Found only 6 flows. (Referenced features define 12 schema validation constraints, requiring at least that many alternate flows, with a minimum floor of 2.)",
+      "Use Case uc-01-record-ellipsoid-location.md must contain at least 10 detailed Alternate/Exception flows. Found only 5 flows. (Referenced features define 10 schema validation constraints, requiring at least that many alternate flows, with a minimum floor of 2.)",
+      "Epic epic-01-ietf-geo-location.md is missing section '## 4. Operational Considerations'.",
+      "Epic epic-01-ietf-geo-location.md is missing section '## 5. Security & Governance'.",
+      "Epic epic-01-ietf-geo-location.md is missing section '## 6. Source References'.",
+      "Schema Mapping: Codebase is empty. No source files found for validation.",
+      "Profile Compliance: Codebase is empty. No source files found for profile validation.",
+      "Test Completeness: No test files found in the workspace."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}

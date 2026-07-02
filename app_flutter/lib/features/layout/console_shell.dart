@@ -255,26 +255,11 @@ class ConsoleShell extends StatelessWidget {
   }
 
   Widget _buildMainWorkspace(BuildContext context) {
-    final isRefFrameSelected = viewModel.selectedNodeId == 'ref-frame';
-
     return Column(
       children: [
         Expanded(
           flex: 3,
-          child: Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: _buildTopologyPane(context),
-              ),
-              Container(width: 1, color: Theme.of(context).dividerColor),
-              if (isRefFrameSelected)
-                Expanded(
-                  flex: 1,
-                  child: _buildPropertyPane(context),
-                ),
-            ],
-          ),
+          child: _buildTopologyPane(context),
         ),
         Container(height: 1, color: Theme.of(context).dividerColor),
         Expanded(
@@ -353,39 +338,6 @@ class ConsoleShell extends StatelessWidget {
     );
   }
 
-  Widget _buildPropertyPane(BuildContext context) {
-    final rfVm = viewModel.referenceFrameVm;
-    return ListenableBuilder(
-      listenable: rfVm,
-      builder: (context, _) {
-        return Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-              child: Row(
-                children: [
-                  const Icon(Icons.public, size: 14, color: Colors.teal),
-                  const SizedBox(width: 6),
-                  Text('Reference Frame',
-                      style: TextStyle(
-                          fontSize: 12, fontWeight: FontWeight.w600,
-                          color: Theme.of(context).textTheme.bodyMedium?.color)),
-                  const Spacer(),
-                  if (rfVm.isValid)
-                    _statusBadge('VALID', Colors.green),
-                  if (!rfVm.isValid)
-                    _statusBadge('INVALID', Colors.red),
-                ],
-              ),
-            ),
-            Divider(height: 1, color: Theme.of(context).dividerColor),
-            Expanded(child: ReferenceFrameForm(viewModel: rfVm)),
-          ],
-        );
-      },
-    );
-  }
-
   Widget _statusBadge(String label, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
@@ -400,21 +352,59 @@ class ConsoleShell extends StatelessWidget {
   }
 
   Widget _buildTablePane(BuildContext context) {
-    final isSelected = viewModel.selectedNodeId != null;
+    final isRefFrameSelected = viewModel.selectedNodeId == 'ref-frame';
 
     return Column(
       children: [
         _tableTabBar(context),
         Divider(height: 1, color: Theme.of(context).dividerColor),
         Expanded(
-          child: isSelected
-              ? _buildDataTable(context)
+          child: isRefFrameSelected
+              ? _buildPropertyPane(context)
               : Center(
                   child: Text('Select a node to view data',
                       style: TextStyle(fontSize: 11, color: Colors.grey.shade500)),
                 ),
         ),
       ],
+    );
+  }
+
+  Widget _buildPropertyPane(BuildContext context) {
+    final rfVm = viewModel.referenceFrameVm;
+    return ListenableBuilder(
+      listenable: rfVm,
+      builder: (context, _) {
+        return Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                border: Border(
+                  bottom: BorderSide(color: Theme.of(context).dividerColor),
+                ),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.public, size: 14, color: Colors.teal),
+                  const SizedBox(width: 6),
+                  Text('Reference Frame Configuration',
+                      style: TextStyle(
+                          fontSize: 11, fontWeight: FontWeight.w600,
+                          color: Theme.of(context).textTheme.bodyMedium?.color)),
+                  const Spacer(),
+                  if (rfVm.isValid)
+                    _statusBadge('VALID', Colors.green),
+                  if (!rfVm.isValid)
+                    _statusBadge('INVALID', Colors.red),
+                ],
+              ),
+            ),
+            Expanded(child: ReferenceFrameForm(viewModel: rfVm)),
+          ],
+        );
+      },
     );
   }
 
@@ -468,44 +458,6 @@ class ConsoleShell extends StatelessWidget {
         icon: Icon(icon, size: 13),
         onPressed: () {},
         padding: EdgeInsets.zero,
-      ),
-    );
-  }
-
-  Widget _buildDataTable(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: SizedBox(
-        width: 500,
-        child: SingleChildScrollView(
-          child: DataTable(
-        columnSpacing: 16,
-        headingRowHeight: 26,
-        dataRowMinHeight: 22,
-        dataRowMaxHeight: 22,
-        horizontalMargin: 8,
-        columns: const [
-          DataColumn(label: Text('Name', style: TextStyle(fontSize: 10))),
-          DataColumn(label: Text('Type', style: TextStyle(fontSize: 10))),
-          DataColumn(label: Text('Status', style: TextStyle(fontSize: 10))),
-          DataColumn(label: Text('Updated', style: TextStyle(fontSize: 10))),
-        ],
-        rows: const [
-          DataRow(cells: [
-            DataCell(Text('node-001', style: TextStyle(fontSize: 10))),
-            DataCell(Text('geo-location', style: TextStyle(fontSize: 10))),
-            DataCell(Text('active', style: TextStyle(fontSize: 10, color: Colors.green))),
-            DataCell(Text('2026-07-02', style: TextStyle(fontSize: 10))),
-          ]),
-          DataRow(cells: [
-            DataCell(Text('node-002', style: TextStyle(fontSize: 10))),
-            DataCell(Text('geo-location', style: TextStyle(fontSize: 10))),
-            DataCell(Text('standby', style: TextStyle(fontSize: 10, color: Colors.orange))),
-            DataCell(Text('2026-06-30', style: TextStyle(fontSize: 10))),
-          ]),
-        ],
-      ),
-        ),
       ),
     );
   }
