@@ -19,7 +19,6 @@ Physical address types model media- or hardware-level addresses using colon-sepa
 ```mermaid
 classDiagram
     class PhysAddress {
-        &lt;&lt;typedef&gt;&gt;
         +baseType : String [1]
         +format : String [1]
         +variableLength : Boolean [1]
@@ -27,7 +26,6 @@ classDiagram
         +smiEquivalent : String [1]
     }
     class MacAddress {
-        &lt;&lt;typedef&gt;&gt;
         +baseType : String [1]
         +format : String [1]
         +fixedLength : Integer [1]
@@ -36,6 +34,7 @@ classDiagram
         +canonicalCase : String [1]
         +smiEquivalent : String [1]
     }
+    PhysAddress <|-- MacAddress
     PhysAddress &lt;|-- MacAddress
 ```
 
@@ -62,7 +61,7 @@ classDiagram
 | phys-address | String | 0..1 | `([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?` | Variable number of hex octets (0..n) separated by colons. Each octet is exactly 2 hex digits. Canonical form is lowercase. Equivalent to SMIv2 PhysAddress. |
 | mac-address | String | 0..1 | `[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}` | Exactly 6 octets (48 bits). Each octet is exactly 2 hex digits separated by colons. Canonical form is lowercase. Conforms to IEEE 802 MAC address format. Equivalent to SMIv2 MacAddress. |
 
-### 3. Logical Operations
+### 3. Logical Operations & Interface Messages
 
 | Operation | Description |
 |---|---|
@@ -73,7 +72,7 @@ classDiagram
 | Compare addresses | Compare two address values case-insensitively after normalization; addresses differing only in hex case are considered equal |
 | Determine if address is IEEE 802 MAC | Check if the address string matches the mac-address pattern (exactly 6 octets); return boolean |
 
-### 4. Exception States
+### 4. Logical Exception States & Validation Failures
 
 | Error Code | Condition | Message |
 |---|---|---|

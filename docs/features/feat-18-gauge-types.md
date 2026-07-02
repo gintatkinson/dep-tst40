@@ -19,19 +19,18 @@ Gauge types model non-negative integers that may both increase and decrease in r
 ```mermaid
 classDiagram
     class Gauge32 {
-        &lt;&lt;typedef&gt;&gt;
         +baseType : String [1]
         +maxValue : Integer [1]
         +minValue : Integer [1]
         +latchesAtBounds : Boolean [1]
     }
     class Gauge64 {
-        &lt;&lt;typedef&gt;&gt;
         +baseType : String [1]
         +maxValue : Integer [1]
         +minValue : Integer [1]
         +latchesAtBounds : Boolean [1]
     }
+    Gauge32 <|-- Gauge64
     Gauge32 &lt;|-- Gauge64
 ```
 
@@ -49,7 +48,7 @@ classDiagram
 | gauge32 | uint32 | [0 .. 4294967295] | Yes | Bidirectional (increase and decrease). Latches at max when modeled value >= max. Latches at min when modeled value <= min. Resumes tracking when value returns within bounds. |
 | gauge64 | uint64 | [0 .. 18446744073709551615] | Yes | Bidirectional (increase and decrease). Same latching semantics as gauge32. Equivalent to SMIv2 CounterBasedGauge64 (RFC 2856). |
 
-### 3. Logical Operations
+### 3. Logical Operations & Interface Messages
 
 | Operation | Description |
 |---|---|
@@ -57,7 +56,7 @@ classDiagram
 | Detect gauge saturation | Determine whether the gauge is currently latched at max or min, indicating the modeled information is outside bounds |
 | Track gauge value changes over time | Observe gauge value deltas to monitor trends, accounting for latching plateaus |
 
-### 4. Exception States
+### 4. Logical Exception States & Validation Failures
 
 | Error Code | Condition | Message |
 |---|---|---|

@@ -20,20 +20,17 @@ This feature defines six YANG typedefs for general-purpose string types providin
 classDiagram
     class StringGroup { }
     class XPath10 {
-        &lt;&lt;typedef&gt;&gt;
         +baseType : String [1]
         +requiresXPathContext : Boolean [1]
         +version : String [1]
     }
     class HexString {
-        &lt;&lt;typedef&gt;&gt;
         +baseType : String [1]
         +format : String [1]
         +canonicalCase : String [1]
         +emptyAllowed : Boolean [1]
     }
     class UUID {
-        &lt;&lt;typedef&gt;&gt;
         +baseType : String [1]
         +format : String [1]
         +canonicalCase : String [1]
@@ -41,7 +38,6 @@ classDiagram
         +fixedLength : Integer [1]
     }
     class DottedQuad {
-        &lt;&lt;typedef&gt;&gt;
         +baseType : String [1]
         +octetCount : Integer [1]
         +octetMaxValue : Integer [1]
@@ -50,19 +46,23 @@ classDiagram
         +noLeadingZeros : Boolean [1]
     }
     class LanguageTag {
-        &lt;&lt;typedef&gt;&gt;
         +baseType : String [1]
         +standard : String [1]
         +canonicalCase : String [1]
         +smiEquivalent : String [1]
     }
     class YangIdentifier {
-        &lt;&lt;typedef&gt;&gt;
         +baseType : String [1]
         +minLength : Integer [1]
         +pattern : String [1]
         +startsWithAlphaOrUnderscore : Boolean [1]
     }
+    StringGroup *-- XPath10
+    StringGroup *-- HexString
+    StringGroup *-- UUID
+    StringGroup *-- DottedQuad
+    StringGroup *-- LanguageTag
+    StringGroup *-- YangIdentifier
 ```
 
 ## Interface Requirements
@@ -104,7 +104,7 @@ classDiagram
 
 - **yang-identifier**: YANG identifier string as defined by the 'identifier' rule in RFC 7950 Section 14. Must start with an uppercase or lowercase ASCII letter (A-Z, a-z) or underscore (_), followed by zero or more characters from the set [a-zA-Z0-9\-_.]. Minimum length is 1. There is no defined maximum length. In YANG version 1 context, identifiers starting with the characters 'xml' (in any case combination) are excluded from use, though this restriction does not apply in YANG 1.1.
 
-### 3. Logical Operations
+### 3. Logical Operations & Interface Messages
 
 | Operation | Description |
 |---|---|
@@ -121,7 +121,7 @@ classDiagram
 | Validate YANG identifier syntax | Check starts with alpha/underscore, contains only allowed characters, and has length >= 1 |
 | Check YANG 1 xml-prefix exclusion | Detect identifiers starting with 'xml' (any case) in YANG 1 context |
 
-### 4. Exception States
+### 4. Logical Exception States & Validation Failures
 
 | Error Code | Condition | Message |
 |---|---|---|

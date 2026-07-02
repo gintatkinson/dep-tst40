@@ -73,7 +73,7 @@ classDiagram
 - zero-based-counter64: same wrapping behavior as counter64; has defined initial value 0; on creation, set to 0 and increases thereafter
 - All: value MUST NOT decrease between consecutive reads (except wrap); a decrease indicates either a wrap event or a discontinuity
 
-### 3. Logical Operations
+### 3. Logical Operations & Interface Messages
 | Operation | Description |
 |---|---|
 | Read counter value | Retrieve the current counter value |
@@ -84,7 +84,7 @@ classDiagram
 | Reset zero-based counter | Set zero-based counter to its initial value 0 |
 | Determine SMIv2 equivalence | Assert semantic equivalence to the corresponding SMIv2 type |
 
-### 4. Exception States
+### 4. Logical Exception States & Validation Failures
 
 | Error Code | Condition | Message |
 |---|---|---|

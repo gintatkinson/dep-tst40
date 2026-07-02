@@ -66,7 +66,7 @@ classDiagram
 | SMIv2 equivalence | object-identifier-128 | object-identifier-128 is semantically equivalent to SMIv2 OBJECT IDENTIFIER. |
 | SHOULD NOT use base for SMIv2 | object-identifier | object-identifier SHOULD NOT be used to represent SMIv2 OBJECT IDENTIFIER values; use object-identifier-128 instead. |
 
-### 3. Logical Operations
+### 3. Logical Operations & Interface Messages
 
 | Operation | Description |
 |---|---|
@@ -75,7 +75,7 @@ classDiagram
 | Compare OIDs (prefix matching) | Check if one OID is a prefix of another by comparing sub-identifier sequences |
 | Convert between types | Cast from object-identifier to object-identifier-128 if the value has 128 or fewer sub-identifiers; cast from object-identifier-128 to object-identifier by widening |
 
-### 4. Exception States
+### 4. Logical Exception States & Validation Failures
 
 | Error Code | Condition | Message |
 |---|---|---|

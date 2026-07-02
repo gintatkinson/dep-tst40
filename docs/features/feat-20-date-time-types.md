@@ -83,7 +83,7 @@ classDiagram
 | time | String | 0..1 | absent | Pattern: `^\d{2}:\d{2}:\d{2}(\.\d+)?(Z\|[\+\-]\d{2}:\d{2})?$`. Instance of time recurring daily. Seconds may be 60. Compatible with XML schema time. Zone semantics same as date-and-time. |
 | time-no-zone | String | 0..1 | absent | Pattern: `^\d{2}:\d{2}:\d{2}(\.\d+)?$`. Derived from time. No timezone offset permitted. |
 
-### 3. Logical Operations
+### 3. Logical Operations & Interface Messages
 | Operation | Request | Response |
 |---|---|---|
 | Parse date-and-time from string | `POST /typedef/date-and-time/parse` with body `{ "value": "2025-12-22T14:30:00Z" }` | Returns parsed structured representation |
@@ -98,7 +98,7 @@ classDiagram
 | Parse time | `POST /typedef/time/parse` with body `{ "value": "14:30:00+01:00" }` | Returns parsed structured representation |
 | Parse time-no-zone | `POST /typedef/time-no-zone/parse` with body `{ "value": "14:30:00" }` | Returns parsed structured representation |
 
-### 4. Exception States
+### 4. Logical Exception States & Validation Failures
 | Error Code | Condition | Message |
 |---|---|---|
 | 422 | date-and-time has invalid month (13+) | "date-and-time: month must be 01–12" |

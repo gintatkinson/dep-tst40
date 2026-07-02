@@ -65,7 +65,7 @@ classDiagram
 - timeticks: non-negative uint32 value modulo 2^32; represents time in hundredths of a second between two reference epochs; schema node description MUST identify both reference epochs; wraps at 4294967295 to 0 after ~497 days; equivalent to SMIv2 TimeTicks
 - timestamp: derived from timeticks; represents the value of an associated timeticks schema node instance at a specific occurrence; specific occurrence MUST be defined in the schema node description; value is zero if the occurrence predates the last time associated timeticks was zero; all timestamp values reset to zero when the associated timeticks wraps; associated timeticks schema node MUST be referenced; equivalent to SMIv2 TimeStamp
 
-### 3. Logical Operations
+### 3. Logical Operations & Interface Messages
 
 | Operation | Description |
 |---|---|
@@ -77,7 +77,7 @@ classDiagram
 | Validate zero timestamp | Distinguish between a timestamp of zero due to predating event vs. zero due to wrap |
 | Determine SMIv2 equivalence | Assert semantic equivalence to SMIv2 TimeTicks and TimeStamp |
 
-### 4. Exception States
+### 4. Logical Exception States & Validation Failures
 
 | Error Code | Condition | Message |
 |---|---|---|
