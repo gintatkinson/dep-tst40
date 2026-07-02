@@ -21,6 +21,8 @@ classDiagram
     class GeoLocation {
         <<container>>
         +getReferenceFrame() : ReferenceFrame [1]
+        +getEffectiveReferenceFrame() : ReferenceFrame [1]
+        +hasOwnReferenceFrame() : Boolean [1]
     }
     class ReferenceFrame {
         <<container>>

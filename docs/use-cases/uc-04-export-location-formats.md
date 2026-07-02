@@ -68,7 +68,47 @@ An integration engineer needs to export a geolocation record to an external stan
   1. System detects that the geodetic-datum value does not have a known GML CRS identifier mapping
   2. System falls back to using the datum value as a custom srsName
   3. System appends a caveat: "CUSTOM_CRS: Geodetic-datum mapped to custom GML srsName. Verify CRS compatibility with GML consumer."
-  4. System returns to step 7 of the Main Success Scenario.
+   4. System returns to step 7 of the Main Success Scenario.
+
+- **5g. W3C Export with Missing Coordinates (Branches from Basic Flow step 4):**
+   1. System detects that latitude or longitude values are null or absent in the geo-location record
+   2. System rejects the W3C export request
+   3. System notifies IntegrationEngineer with error "W3C_EXPORT_INCOMPLETE: W3C Geolocation API requires both latitude and longitude values"
+
+- **5h. geo: URI Export with Missing Coordinates (Branches from Basic Flow step 4):**
+   1. System detects that latitude or longitude values are missing in the geo-location record
+   2. System rejects the geo: URI export request
+   3. System notifies IntegrationEngineer with error "GEO_URI_INCOMPLETE: geo: URI export requires both latitude and longitude coordinates"
+
+- **5i. Latitude/Longitude Precision Exceeded for Target Format (Branches from Basic Flow step 6):**
+   1. System detects that the latitude or longitude decimal64(16) precision exceeds the target format's supported precision (e.g., double for W3C)
+   2. System applies rounding to fit target format precision and appends precision-caveat note
+   3. System returns to step 8 of the Main Success Scenario.
+
+- **5j. Cartesian Coordinates Not Mappable to W3C (Branches from Basic Flow step 5):**
+   1. System detects that the W3C format was requested but the location uses Cartesian coordinates instead of ellipsoid
+   2. System rejects the W3C export request
+   3. System notifies IntegrationEngineer with error "W3C_EXPORT_UNSUPPORTED: W3C Geolocation API does not support Cartesian coordinates. Use ellipsoid coordinates or export to GML."
+
+- **5k. Cartesian Coordinates Not Mappable to KML (Branches from Basic Flow step 5):**
+   1. System detects that the KML format was requested but the location uses Cartesian coordinates without an Earth-based CRS
+   2. System issues a warning "KML_CARTESIAN_CAVEAT: KML is designed for Earth-based visualization. Cartesian coordinates may not render correctly."
+   3. System returns to step 7 of the Main Success Scenario.
+
+- **5l. Missing Velocity Data for W3C Complete Export (Branches from Basic Flow step 5):**
+   1. System detects that no velocity vector is configured but W3C export was requested with full motion data
+   2. System omits speed and heading fields from the W3C GeolocationPosition
+   3. System includes a note "VELOCITY_NOT_CONFIGURED: Speed and heading omitted" and returns to step 7.
+
+- **5m. Missing Timestamp for GML Observation Export (Branches from Basic Flow step 5):**
+   1. System detects that the timestamp is absent when GML Observation format is requested
+   2. System issues a warning "GML_OBSERVATION_INCOMPLETE: GML Observation requires a timestamp. Exporting as gml:pos without observation metadata."
+   3. System returns to step 7 of the Main Success Scenario.
+
+- **5n. Timestamp Format Compatibility (Branches from Basic Flow step 6):**
+   1. System detects that the timestamp string precision (e.g., nanosecond fractional seconds) exceeds the target format's timestamp precision
+   2. System truncates the timestamp to target format's maximum resolution
+   3. System appends a precision-caveat note: "TIMESTAMP_TRUNCATED: Timestamp precision reduced to match target format"
 
 ## 6. Postconditions (Guarantees)
 - **Success Guarantee:** A correctly formatted export is produced in the requested format. The export contains all available mappable fields. A precision-caveat note documents any precision loss from YANG decimal64 to target format types. Source data remains unchanged.

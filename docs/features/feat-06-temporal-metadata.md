@@ -21,7 +21,13 @@ classDiagram
     class GeoLocation {
         +String timestamp [1]
         +String validUntil [0..1]
+        +getTemporalMetadata() : TemporalMetadata [1]
+        +getFullLocation() : FullLocationData [1]
     }
+    class GeoLocationGrouping {
+        <<grouping>>
+    }
+    GeoLocationGrouping "1" *-- "1" GeoLocation : contains
 ```
 
 ## Interface Requirements

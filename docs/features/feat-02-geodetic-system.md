@@ -20,6 +20,7 @@ Configures the geodetic system for a location's reference frame. The geodetic sy
 classDiagram
     class ReferenceFrame {
         +String astronomicalBody [1]
+        +getGeodeticSystem() : GeodeticSystem [1]
     }
     class GeodeticSystem {
         +String geodeticDatum [0..1]

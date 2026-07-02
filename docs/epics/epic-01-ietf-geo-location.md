@@ -90,11 +90,54 @@ classDiagram
     LocationChoice <|-- EllipsoidLocation
     LocationChoice <|-- CartesianLocation
     GeoLocation *-- Velocity
+
+    class MotionTrackingService {
+        <<service>>
+        +computeSpeed(vNorth : Real, vEast : Real) : Real [1]
+        +computeHeading(vNorth : Real, vEast : Real) : Real [1]
+    }
+    class SpeedHeadingCalculator {
+        <<service>>
+        +computeSpeed(vNorth : Real, vEast : Real) : Real [1]
+        +computeHeading(vNorth : Real, vEast : Real) : Real [1]
+    }
+    class LocationDataConsumer {
+        <<actor>>
+    }
+    class GeoLocationRegistry {
+        <<service>>
+        +getLocation(locationId : String) : GeoLocation [1]
+        +getCurrentTime() : String [1]
+    }
+    class SystemClock {
+        <<service>>
+        +getCurrentTime() : String [1]
+    }
+    class LocationHierarchyManager {
+        <<service>>
+    }
+    class LocationExporter {
+        <<service>>
+    }
+    class GeoUriBuilder {
+        <<service>>
+        +build(latitude : Real, longitude : Real, datum : String, accuracy : Real, height : Real) : String [1]
+    }
+    class FormatMapper {
+        <<service>>
+        +getFullLocation() : FullLocationData [1]
+    }
+    class W3CGeolocationAdapter {
+        <<service>>
+        +toGeolocationPosition(fullData : FullLocationData) : GeolocationPosition [1]
+    }
+    class GMLPositionAdapter {
+        <<service>>
+        +toGMLPosition(fullData : FullLocationData) : GMLPosition [1]
+    }
 ```
 
-## 4. State Machine Definitions
-
-### System State Machine Diagram
+### System State Machine Definition
 ```mermaid
 stateDiagram-v2
     [*] --> Unconfigured
@@ -109,7 +152,7 @@ stateDiagram-v2
     InMotion --> Located : clearLocation / resetCoordinates
 ```
 
-## 5. Operational Considerations
+## 4. Operational Considerations
 The geolocation grouping is designed for integration into YANG data models that manage network elements. It supports operational workflows including:
 - **Location Audit:** Operators can query the timestamp and valid-until fields to identify stale location data requiring refresh
 - **Nested Location Management:** When modeling hierarchical infrastructure (data center → rack → device), child locations may inherit reference-frame configuration from parent containers
@@ -117,23 +160,13 @@ The geolocation grouping is designed for integration into YANG data models that 
 - **Format Interoperability:** Location data can be exported to IETF geo: URI (RFC 5870), W3C Geolocation API, OGC GML, and Google KML formats for integration with external systems
 - **Multi-Body Operations:** The same grouping supports location recording on Earth, Moon, Mars, and other astronomical bodies, enabling operations in interplanetary network scenarios
 
-## 6. Security & Governance
+## 5. Security & Governance
 Per RFC 9179 Section 7, the YANG module defines writable/creatable/deletable data nodes. While none of these nodes are by themselves considered more sensitive than standard configuration, the grouping identifies geographic locations — module authors SHOULD consider privacy issues when the data is readable (e.g., customer device locations). Access control SHOULD be enforced via NETCONF Access Control Model (RFC 8341) or equivalent mechanisms.
 
 Governance:
 - **IANA Registry:** The "Geodetic System Values" registry under the "YANG Geographic Location Parameters" registry (RFC 9179 Section 6.1) governs standard geodetic system names with First Come First Served policy
 - **Schema Authority:** The normative specification (RFC 9179) and structural schema (ietf-geo-location@2022-02-11.yang) are the authoritative references. Where they conflict, the schema is authoritative for structural completeness; the normative text is authoritative for behavioral semantics.
 
-## 7. Specification Context
-The `ietf-geo-location` YANG module (RFC 9179) defines a grouping of a container object for specifying a location on or around an astronomical object (e.g., 'earth'). The module conforms to ISO 6709:2008 for standard representation of geographic point location by coordinates. It supports ellipsoidal coordinates (latitude, longitude, height) and Cartesian coordinates (x, y, z), velocity vectors for motion tracking, and temporal metadata for location staleness detection. The module imports `ietf-yang-types` (RFC 6991) for the `date-and-time` type used in timestamp and valid-until leaves.
-
-Key design decisions:
-- Default astronomical body is 'earth' with geodetic-datum 'wgs-84' (World Geodetic System 1984)
-- An optional `alternate-systems` feature flag enables specification of alternate coordinate systems (e.g., virtual realities)
-- Location is specified via a YANG choice between ellipsoid (latitude/longitude/height) and Cartesian (x/y/z) coordinate forms
-- A dedicated IANA registry ("Geodetic System Values") allocates standard names for geodetic systems
-- The velocity vector tracks relatively stable motion (including continental drift) and provides formulas for deriving 2D speed and heading
-
-## 8. Source References
+## 6. Source References
 Structural Schema: [ietf-geo-location@2022-02-11.yang](https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-geo-location%402022-02-11.yang)
 Normative Specification: [RFC 9179 - A YANG Grouping for Geographic Locations](https://datatracker.ietf.org/doc/rfc9179/)

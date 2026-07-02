@@ -69,6 +69,36 @@ A system administrator needs to record the geographic location of a device on a 
   2. System issues a warning "HEIGHT_ACCURACY_NOT_APPLICABLE: Height-accuracy is not applicable to Cartesian coordinates and will be ignored"
   3. System returns to step 8 of the Main Success Scenario.
 
+- **5g. Invalid Astronomical Body Pattern (Branches from Basic Flow step 2):**
+  1. System detects astronomical-body value contains control characters or invalid ASCII characters outside the valid ranges (32..64, 91..126)
+  2. System rejects the location recording request
+  3. System notifies SystemAdministrator with error "INVALID_ASTRONOMICAL_BODY: Value must match pattern and use only valid ASCII characters"
+
+- **5h. Invalid Geodetic Datum Pattern (Branches from Basic Flow step 2):**
+  1. System detects geodetic-datum value contains control characters or invalid ASCII characters
+  2. System rejects the location recording request
+  3. System notifies SystemAdministrator with error "INVALID_GEODETIC_DATUM: Value must match pattern and use only valid ASCII characters"
+
+- **5i. Geodetic Datum Not in IANA Registry (Branches from Basic Flow step 2):**
+  1. System detects geodetic-datum value is not registered in the IANA "Geodetic System Values" registry
+  2. System issues a warning "UNREGISTERED_DATUM: Geodetic-datum value is not in the IANA registry. Using as provided; coordinate interpretation may be non-standard."
+  3. System returns to step 4 of the Main Success Scenario.
+
+- **5j. Coord-Accuracy Precision Exceeded (Branches from Basic Flow step 2):**
+  1. System detects coord-accuracy value exceeds 6 fractional digits of precision
+  2. System rejects the location recording request
+  3. System notifies SystemAdministrator with error "PRECISION_EXCEEDED: Coord-accuracy has more than 6 fractional digits"
+
+- **5k. Divergent Geodetic Datum Default (Branches from Basic Flow step 7):**
+  1. System detects that astronomical-body is "earth" but geodetic-datum is NOT "wgs-84"
+  2. System issues a warning "NON_DEFAULT_DATUM: Geodetic-datum is not wgs-84 while body is earth. Ensure the non-default datum is intentional."
+  3. System returns to step 8 of the Main Success Scenario.
+
+- **5l. X/Y/Z Units Mismatch (Branches from Basic Flow steps 4-6):**
+  1. System detects that one of the Cartesian coordinate values does not have the correct unit 'meters'
+  2. System rejects the location recording request
+  3. System notifies SystemAdministrator with error "UNIT_MISMATCH: All Cartesian coordinates must be specified in meters"
+
 ## 6. Postconditions (Guarantees)
 - **Success Guarantee:** A complete geo-location object is stored with validated Cartesian coordinates (x, y, z in meters), reference frame, geodetic system parameters, and temporal metadata. The coordinate system type is explicitly Cartesian. No ellipsoid coordinates are set.
 - **Failure Guarantee:** No partial data is stored. The system state remains unchanged. An error message is returned to the SystemAdministrator describing the specific validation failure.

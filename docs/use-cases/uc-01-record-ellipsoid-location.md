@@ -63,6 +63,31 @@ A system administrator needs to record the geographic location of a network elem
   2. System rejects the location recording request
   3. System notifies SystemAdministrator with error "INVALID_TIMESTAMP: Timestamp must conform to RFC 3339 format"
 
+- **5f. Invalid Astronomical Body Pattern (Branches from Basic Flow step 2):**
+  1. System detects astronomical-body value contains control characters (values outside 32..64 and 91..126) or invalid ASCII characters
+  2. System rejects the location recording request
+  3. System notifies SystemAdministrator with error "INVALID_ASTRONOMICAL_BODY: Value must match pattern [ -@[\\-^_-~]* and use only valid ASCII characters"
+
+- **5g. Alternate System Not Available (Branches from Basic Flow step 2):**
+  1. System detects that an alternate-system value is provided but the 'alternate-systems' feature is not enabled on the device
+  2. System rejects the location recording request
+  3. System notifies SystemAdministrator with error "ALTERNATE_SYSTEM_NOT_SUPPORTED: The alternate-systems feature is not enabled. Remove alternate-system value or enable the feature."
+
+- **5h. Invalid Geodetic Datum Pattern (Branches from Basic Flow step 2):**
+  1. System detects geodetic-datum value contains control characters or invalid ASCII characters outside the allowed ranges (32..64, 91..126)
+  2. System rejects the location recording request
+  3. System notifies SystemAdministrator with error "INVALID_GEODETIC_DATUM: Value must match pattern [ -@[\\-^_-~]* and use only valid ASCII characters"
+
+- **5i. Coord-Accuracy Precision Exceeded (Branches from Basic Flow step 2):**
+  1. System detects coord-accuracy value exceeds 6 fractional digits of precision (decimal64 fraction-digits 6)
+  2. System rejects the location recording request
+  3. System notifies SystemAdministrator with error "PRECISION_EXCEEDED: Coord-accuracy has more than 6 fractional digits"
+
+- **5j. Height-Accuracy Precision Exceeded (Branches from Basic Flow step 2):**
+  1. System detects height-accuracy value exceeds 6 fractional digits of precision (decimal64 fraction-digits 6)
+  2. System rejects the location recording request
+  3. System notifies SystemAdministrator with error "PRECISION_EXCEEDED: Height-accuracy has more than 6 fractional digits"
+
 ## 6. Postconditions (Guarantees)
 - **Success Guarantee:** A complete geo-location object is stored with validated ellipsoid coordinates, reference frame, geodetic system parameters, and temporal metadata (timestamp + optional valid-until). The location data is available for query, export, and further configuration operations.
 - **Failure Guarantee:** No partial data is stored. The system state remains unchanged. An error message is returned to the SystemAdministrator describing the specific validation failure.
