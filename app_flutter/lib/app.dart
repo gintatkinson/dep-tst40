@@ -1,60 +1,37 @@
 import 'package:flutter/material.dart';
+import 'core/app_theme.dart';
 import 'data/reference_frame_repository.dart';
-import 'domain/feature_flags.dart';
-import 'domain/reference_frame_validator.dart';
-import 'features/reference_frame/reference_frame_form.dart';
-import 'features/reference_frame/reference_frame_viewmodel.dart';
+import 'features/layout/console_shell.dart';
 
 class PipelineApp extends StatelessWidget {
   final ReferenceFrameRepository repository;
-  final FeatureFlags featureFlags;
+  final AppTheme themeController;
 
   const PipelineApp({
     super.key,
     required this.repository,
-    this.featureFlags = const FeatureFlags(),
+    required this.themeController,
   });
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pipeline App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorSchemeSeed: Colors.blue,
-        useMaterial3: true,
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        colorSchemeSeed: Colors.blue,
-        useMaterial3: true,
-        brightness: Brightness.dark,
-      ),
-      home: _buildHome(),
-    );
-  }
+    final consoleVm = ConsoleViewModel(repository: repository);
 
-  Widget _buildHome() {
-    final viewModel = ReferenceFrameViewModel(
-      repository: repository,
-      validator: const ReferenceFrameValidator(),
-      featureFlags: featureFlags,
-    );
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Reference Frame Configuration'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 600),
-          child: Card(
-            margin: const EdgeInsets.all(16),
-            child: ReferenceFrameForm(viewModel: viewModel),
+    return ListenableBuilder(
+      listenable: themeController,
+      builder: (context, _) {
+        return MaterialApp(
+          title: 'Systems Console',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme(),
+          darkTheme: AppTheme.darkTheme(),
+          themeMode: themeController.mode,
+          home: ConsoleShell(
+            viewModel: consoleVm,
+            themeController: themeController,
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

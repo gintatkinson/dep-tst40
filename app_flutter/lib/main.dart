@@ -3,6 +3,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'app.dart';
+import 'core/app_theme.dart';
 import 'data/sqlite_reference_frame_repository.dart';
 
 void main() async {
@@ -31,6 +32,10 @@ void main() async {
   );
 
   final repository = SqliteReferenceFrameRepository(db);
+  final themeController = AppTheme();
 
-  runApp(PipelineApp(repository: repository));
+  runApp(PipelineApp(
+    repository: repository,
+    themeController: themeController,
+  ));
 }
