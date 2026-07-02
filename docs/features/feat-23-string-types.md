@@ -10,7 +10,7 @@ spec_source: "RFC 9911"
 # Feature: Define General String Types
 
 ## Parent Epic
-- [ ] #[EpicIssueID] - [ietf-yang-types: Common YANG Data Types](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-02-ietf-yang-types.md) (General string types provide common string validation patterns for the YANG type library)
+- [ ] #25 - [ietf-yang-types: Common YANG Data Types](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-02-ietf-yang-types.md) (General string types provide common string validation patterns for the YANG type library)
 
 ## Description
 This feature defines six YANG typedefs for general-purpose string types providing common validation and formatting patterns. `xpath1.0` represents an XPATH 1.0 expression; schema nodes using this type MUST declare the XPath evaluation context in their description. `hex-string` represents hexadecimal octets separated by colons, with an optional pattern allowing the empty string; canonical form is lowercase. `uuid` represents a Universally Unique Identifier per RFC 9562 in the canonical 8-4-4-4-12 hexadecimal string format with dashes at fixed positions; canonical form is lowercase. `dotted-quad` represents an unsigned 32-bit number in dotted-quad notation with four octets (0..255 each) separated by dots, with no leading zeros on octets (except zero itself). `language-tag` represents a language tag per RFC 5646 (BCP 47), stored in canonical lowercase, and is semantically equivalent to the SMIv2 LangTag textual convention for tags within SMIv2 length constraints. `yang-identifier` represents a YANG identifier string as defined by the 'identifier' rule in RFC 7950 Section 14: starts with an alphabetic character or underscore, followed by zero or more alphabetic, numeric, underscore, hyphen, or dot characters, with a minimum length of 1.
@@ -18,49 +18,50 @@ This feature defines six YANG typedefs for general-purpose string types providin
 ## UML Class Diagram
 ```mermaid
 classDiagram
+    class StringGroup { }
     class XPath10 {
         &lt;&lt;typedef&gt;&gt;
-        +baseType : String = "string" [1]
-        +requiresXPathContext : Boolean = true [1]
-        +version : String = "1.0" [1]
+        +baseType : String [1]
+        +requiresXPathContext : Boolean [1]
+        +version : String [1]
     }
     class HexString {
         &lt;&lt;typedef&gt;&gt;
-        +baseType : String = "string" [1]
-        +format : String = "hex-octets-colon-separated" [1]
-        +canonicalCase : String = "lowercase" [1]
-        +emptyAllowed : Boolean = true [1]
+        +baseType : String [1]
+        +format : String [1]
+        +canonicalCase : String [1]
+        +emptyAllowed : Boolean [1]
     }
     class UUID {
         &lt;&lt;typedef&gt;&gt;
-        +baseType : String = "string" [1]
-        +format : String = "8-4-4-4-12" [1]
-        +canonicalCase : String = "lowercase" [1]
-        +standard : String = "RFC 9562" [1]
-        +fixedLength : Integer = 36 [1]
+        +baseType : String [1]
+        +format : String [1]
+        +canonicalCase : String [1]
+        +standard : String [1]
+        +fixedLength : Integer [1]
     }
     class DottedQuad {
         &lt;&lt;typedef&gt;&gt;
-        +baseType : String = "string" [1]
-        +octetCount : Integer = 4 [1]
-        +octetMaxValue : Integer = 255 [1]
-        +octetMinValue : Integer = 0 [1]
-        +separator : String = "." [1]
-        +noLeadingZeros : Boolean = true [1]
+        +baseType : String [1]
+        +octetCount : Integer [1]
+        +octetMaxValue : Integer [1]
+        +octetMinValue : Integer [1]
+        +separator : String [1]
+        +noLeadingZeros : Boolean [1]
     }
     class LanguageTag {
         &lt;&lt;typedef&gt;&gt;
-        +baseType : String = "string" [1]
-        +standard : String = "BCP 47 (RFC 5646)" [1]
-        +canonicalCase : String = "lowercase" [1]
-        +smiEquivalent : String = "LangTag" [1]
+        +baseType : String [1]
+        +standard : String [1]
+        +canonicalCase : String [1]
+        +smiEquivalent : String [1]
     }
     class YangIdentifier {
         &lt;&lt;typedef&gt;&gt;
-        +baseType : String = "string" [1]
-        +minLength : Integer = 1 [1]
-        +pattern : String = "[a-zA-Z_][a-zA-Z0-9\\\\-\\\\.]*" [1]
-        +startsWithAlphaOrUnderscore : Boolean = true [1]
+        +baseType : String [1]
+        +minLength : Integer [1]
+        +pattern : String [1]
+        +startsWithAlphaOrUnderscore : Boolean [1]
     }
 ```
 

@@ -10,7 +10,7 @@ spec_source: "RFC 9911"
 # Feature: Define Time Duration Types
 
 ## Parent Epic
-- [ ] #[EpicIssueID] - [ietf-yang-types: Common YANG Data Types](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-02-ietf-yang-types.md) (Duration types express time intervals across multiple granularities for the YANG type library)
+- [ ] #25 - [ietf-yang-types: Common YANG Data Types](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-02-ietf-yang-types.md) (Duration types express time intervals across multiple granularities for the YANG type library)
 
 ## Description
 This feature defines nine platform-independent time duration typedefs, each measuring a time interval at a specific granularity derived from the `yang:timeticks` base type defined in RFC 9911. The typedefs span seven orders of magnitude — from hours (coarsest) to nanoseconds (finest) — and are offered in two integer widths: `int32` for compact storage and `int64` for extended range. All typedefs natively support signed values, enabling temporal arithmetic across zero; for use cases requiring only non-negative durations, every type can be range-restricted to `0..max`.
@@ -21,58 +21,48 @@ The type hierarchy consists of: `hours32` (approx -89,478,485 to +89,478,485 day
 ```mermaid
 classDiagram
     class Duration32 {
-        <<typedef>>
-        +baseType : String = "int32" [1]
+        +baseType : String [1]
         +unit : String [1]
-        +positiveOnlyRecommended : Boolean = true [1]
+        +positiveOnlyRecommended : Boolean [1]
     }
     class Hours32 {
-        <<typedef>>
-        +unit : String = "hours" [1]
-        +maxRangeDays : Integer = 89478485 [1]
+        +unit : String [1]
+        +maxRangeDays : Integer [1]
     }
     class Minutes32 {
-        <<typedef>>
-        +unit : String = "minutes" [1]
-        +maxRangeDays : Integer = 1491308 [1]
+        +unit : String [1]
+        +maxRangeDays : Integer [1]
     }
     class Seconds32 {
-        <<typedef>>
-        +unit : String = "seconds" [1]
-        +maxRangeDays : Integer = 24855 [1]
+        +unit : String [1]
+        +maxRangeDays : Integer [1]
     }
     class Centiseconds32 {
-        <<typedef>>
-        +unit : String = "centiseconds" [1]
-        +smiEquivalent : String = "TimeInterval" [1]
-        +maxRangeDays : Integer = 248 [1]
+        +unit : String [1]
+        +smiEquivalent : String [1]
+        +maxRangeDays : Integer [1]
     }
     class Milliseconds32 {
-        <<typedef>>
-        +unit : String = "milliseconds" [1]
-        +maxRangeDays : Integer = 24 [1]
+        +unit : String [1]
+        +maxRangeDays : Integer [1]
     }
     class Microseconds32 {
-        <<typedef>>
-        +unit : String = "microseconds" [1]
-        +maxRangeMinutes : Integer = 35 [1]
+        +unit : String [1]
+        +maxRangeMinutes : Integer [1]
     }
     class Microseconds64 {
-        <<typedef>>
-        +baseType : String = "int64" [1]
-        +unit : String = "microseconds" [1]
-        +maxRangeDays : Integer = 106751991 [1]
+        +baseType : String [1]
+        +unit : String [1]
+        +maxRangeDays : Integer [1]
     }
     class Nanoseconds32 {
-        <<typedef>>
-        +unit : String = "nanoseconds" [1]
-        +maxRangeSeconds : Integer = 2 [1]
+        +unit : String [1]
+        +maxRangeSeconds : Integer [1]
     }
     class Nanoseconds64 {
-        <<typedef>>
-        +baseType : String = "int64" [1]
-        +unit : String = "nanoseconds" [1]
-        +maxRangeDays : Integer = 106753 [1]
+        +baseType : String [1]
+        +unit : String [1]
+        +maxRangeDays : Integer [1]
     }
     Duration32 <|-- Hours32
     Duration32 <|-- Minutes32

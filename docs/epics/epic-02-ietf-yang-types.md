@@ -22,8 +22,18 @@ RFC 9911 defines the `ietf-yang-types` YANG module, a collection of 32 generally
 - [ ] #24 - [Define SNMP Temporal Types](https://github.com/gintatkinson/dep-tst40/blob/main/docs/features/feat-24-snmp-temporal-types.md) (timeticks, timestamp)
 
 ### Associated Use Cases & User Stories
-*(To be linked after Phases 2 and 3)*
 
+#### Associated User Stories
+- [ ] #26 - [Detect Counter Wrap and Compute Deltas](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-06-counter-wrap-detection.md) (Counter delta computation with wrap detection)
+- [ ] #27 - [Validate Date-Time Values per ISO 8601 and RFC 9557](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-07-datetime-validation.md) (Date-time validation with leap seconds and RFC 9557 tz)
+- [ ] #28 - [Manage Timestamp Lifecycle Across Timeticks Wrap Cycles](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-08-timestamp-lifecycle.md) (Timestamp reset on timeticks wrap)
+- [ ] #29 - [Map YANG Data Types to SMIv2 Equivalents](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-09-smiv2-mapping.md) (SMIv2 type equivalence mapping)
+
+#### Associated Use Cases
+- [ ] #26 - [Detect Counter Wrap and Compute Deltas](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-06-counter-wrap-detection.md) (Counter delta computation with wrap detection)
+- [ ] #27 - [Validate Date-Time Values per ISO 8601 and RFC 9557](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-07-datetime-validation.md) (Date-time validation with leap seconds and RFC 9557 tz)
+- [ ] #28 - [Manage Timestamp Lifecycle Across Timeticks Wrap Cycles](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-08-timestamp-lifecycle.md) (Timestamp reset on timeticks wrap)
+- [ ] #29 - [Map YANG Data Types to SMIv2 Equivalents](https://github.com/gintatkinson/dep-tst40/blob/main/docs/user-stories/us-09-smiv2-mapping.md) (SMIv2 type equivalence mapping)
 ## 3. Architecture and System Interaction Diagrams
 
 ### System-Level UML Class Diagram
@@ -31,65 +41,65 @@ RFC 9911 defines the `ietf-yang-types` YANG module, a collection of 32 generally
 classDiagram
     class IetfYangTypes {
         <<module>>
-        +namespace : String = "urn:ietf:params:xml:ns:yang:ietf-yang-types" [1]
-        +prefix : String = "yang" [1]
-        +revision : String = "2025-12-22" [1]
+        +namespace : String [1]
+        +prefix : String [1]
+        +revision : String [1]
     }
     class CounterGroup {
         <<grouping>>
-        +counter32 : uint32 [0..1]
-        +zeroBasedCounter32 : counter32 [0..1]
-        +counter64 : uint64 [0..1]
-        +zeroBasedCounter64 : counter64 [0..1]
+        +counter32 : String [0..1]
+        +zeroBasedCounter32 : String [0..1]
+        +counter64 : String [0..1]
+        +zeroBasedCounter64 : String [0..1]
     }
     class GaugeGroup {
         <<grouping>>
-        +gauge32 : uint32 [0..1]
-        +gauge64 : uint64 [0..1]
+        +gauge32 : String [0..1]
+        +gauge64 : String [0..1]
     }
     class ObjectIdentifierGroup {
         <<grouping>>
-        +objectIdentifier : string [0..1]
-        +objectIdentifier128 : object-identifier [0..1]
+        +objectIdentifier : String [0..1]
+        +objectIdentifier128 : String [0..1]
     }
     class DateTimeGroup {
         <<grouping>>
-        +dateAndTime : string [0..1]
-        +date : string [0..1]
-        +dateNoZone : date [0..1]
-        +time : string [0..1]
-        +timeNoZone : time [0..1]
+        +dateAndTime : String [0..1]
+        +date : String [0..1]
+        +dateNoZone : String [0..1]
+        +time : String [0..1]
+        +timeNoZone : String [0..1]
     }
     class DurationGroup {
         <<grouping>>
-        +hours32 : int32 [0..1]
-        +minutes32 : int32 [0..1]
-        +seconds32 : int32 [0..1]
-        +centiseconds32 : int32 [0..1]
-        +milliseconds32 : int32 [0..1]
-        +microseconds32 : int32 [0..1]
-        +microseconds64 : int64 [0..1]
-        +nanoseconds32 : int32 [0..1]
-        +nanoseconds64 : int64 [0..1]
+        +hours32 : String [0..1]
+        +minutes32 : String [0..1]
+        +seconds32 : String [0..1]
+        +centiseconds32 : String [0..1]
+        +milliseconds32 : String [0..1]
+        +microseconds32 : String [0..1]
+        +microseconds64 : String [0..1]
+        +nanoseconds32 : String [0..1]
+        +nanoseconds64 : String [0..1]
     }
     class AddressGroup {
         <<grouping>>
-        +physAddress : string [0..1]
-        +macAddress : string [0..1]
+        +physAddress : String [0..1]
+        +macAddress : String [0..1]
     }
     class StringGroup {
         <<grouping>>
-        +xpath10 : string [0..1]
-        +hexString : string [0..1]
-        +uuid : string [0..1]
-        +dottedQuad : string [0..1]
-        +languageTag : string [0..1]
-        +yangIdentifier : string [0..1]
+        +xpath10 : String [0..1]
+        +hexString : String [0..1]
+        +uuid : String [0..1]
+        +dottedQuad : String [0..1]
+        +languageTag : String [0..1]
+        +yangIdentifier : String [0..1]
     }
     class SnmpGroup {
         <<grouping>>
-        +timeticks : uint32 [0..1]
-        +timestamp : timeticks [0..1]
+        +timeticks : String [0..1]
+        +timestamp : String [0..1]
     }
     IetfYangTypes *-- CounterGroup
     IetfYangTypes *-- GaugeGroup

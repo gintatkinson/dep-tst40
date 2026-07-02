@@ -10,7 +10,7 @@ spec_source: "RFC 9911"
 # Feature: Define Object Identifier Types
 
 ## Parent Epic
-- [ ] #[EpicIssueID] - [ietf-yang-types: Common YANG Data Types](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-02-ietf-yang-types.md) (Object identifier types enable hierarchical name registration in the YANG type library)
+- [ ] #25 - [ietf-yang-types: Common YANG Data Types](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-02-ietf-yang-types.md) (Object identifier types enable hierarchical name registration in the YANG type library)
 
 ## Description
 The object identifier types represent administratively assigned names in a registration-hierarchical-name tree as defined by ASN.1 and ISO 9834-1. The base `object-identifier` type constrains its string representation to a sequence of non-negative integer sub-identifiers separated by single dots, with no whitespace. The first sub-identifier is restricted to 0, 1, or 2. When the first sub-identifier is 0 or 1, the second sub-identifier must not exceed 39. Each sub-identifier must not exceed 2^32-1 (4294967295), and there must be at least two sub-identifiers. The `object-identifier-128` type derives from `object-identifier` and adds a limit of at most 128 sub-identifiers, making it functionally equivalent to the SMIv2 OBJECT IDENTIFIER type. The base `object-identifier` type SHOULD NOT be used to represent SMIv2 OBJECT IDENTIFIER values; `object-identifier-128` SHOULD be used instead.
@@ -19,17 +19,15 @@ The object identifier types represent administratively assigned names in a regis
 ```mermaid
 classDiagram
     class ObjectIdentifier {
-        <<typedef>>
-        +baseType : String = "string" [1]
+        +baseType : String [1]
         +pattern : String [1]
-        +minSubIdentifiers : Integer = 2 [1]
-        +firstSubIdRestricted : Boolean = true [1]
-        +maxSubIdValue : Integer = 4294967295 [1]
+        +minSubIdentifiers : Integer [1]
+        +firstSubIdRestricted : Boolean [1]
+        +maxSubIdValue : Integer [1]
     }
     class ObjectIdentifier128 {
-        <<typedef>>
-        +baseType : String = "object-identifier" [1]
-        +maxSubIdentifiers : Integer = 128 [1]
+        +baseType : String [1]
+        +maxSubIdentifiers : Integer [1]
         +pattern : String [1]
     }
     ObjectIdentifier <|-- ObjectIdentifier128

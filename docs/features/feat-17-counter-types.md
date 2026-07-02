@@ -10,7 +10,7 @@ spec_source: "RFC 9911"
 # Feature: Define Counter Types
 
 ## Parent Epic
-- [ ] #[EpicIssueID] - [ietf-yang-types: Common YANG Data Types](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-02-ietf-yang-types.md) (Counter types are foundational monitoring data types for the YANG type library)
+- [ ] #25 - [ietf-yang-types: Common YANG Data Types](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-02-ietf-yang-types.md) (Counter types are foundational monitoring data types for the YANG type library)
 
 ## Description
 This feature defines four YANG typedefs for monotonically increasing counters that wrap at their maximum value. `counter32` is a uint32-based counter that monotonically increases to 2^32-1 (4294967295) then wraps to 0; it has no defined initial value, MUST NOT be used on configuration schema nodes, and SHOULD NOT carry a default statement. `zero-based-counter32` derives from counter32 with a default of "0", providing a defined initial value of zero. `counter64` is a uint64-based counter that monotonically increases to 2^64-1 (18446744073709551615) then wraps to 0, with the same constraints as counter32 regarding configuration nodes and defaults. `zero-based-counter64` derives from counter64 with a default of "0". Each type is semantically equivalent to its SMIv2 counterpart: Counter32 (SNMPv2-SMI), ZeroBasedCounter32 (RMON2-MIB), Counter64 (SNMPv2-SMI), and ZeroBasedCounter64 (HCNUM-TC) respectively. A single counter value has no information content by itself; delta values are meaningful when read within the minimum wrap time, and discontinuities MUST be documented by a corresponding schema node.
@@ -19,32 +19,30 @@ This feature defines four YANG typedefs for monotonically increasing counters th
 ```mermaid
 classDiagram
     class Counter32 {
-        <<typedef>>
-        +baseType : String = "uint32" [1]
-        +maxValue : Integer = 4294967295 [1]
-        +hasInitialValue : Boolean = false [1]
-        +wrapsAtMax : Boolean = true [1]
+        +baseType : String [1]
+        +maxValue : Integer [1]
+        +hasInitialValue : Boolean [1]
+        +wrapsAtMax : Boolean [1]
     }
     class ZeroBasedCounter32 {
-        <<typedef>>
-        +baseType : String = "counter32" [1]
-        +default : Integer = 0 [1]
-        +hasInitialValue : Boolean = true [1]
+        +baseType : String [1]
+        +default : Integer [1]
+        +hasInitialValue : Boolean [1]
     }
     class Counter64 {
-        <<typedef>>
-        +baseType : String = "uint64" [1]
-        +maxValue : Integer = 18446744073709551615 [1]
-        +hasInitialValue : Boolean = false [1]
-        +wrapsAtMax : Boolean = true [1]
+        +baseType : String [1]
+        +maxValue : Integer [1]
+        +hasInitialValue : Boolean [1]
+        +wrapsAtMax : Boolean [1]
     }
     class ZeroBasedCounter64 {
-        <<typedef>>
-        +baseType : String = "counter64" [1]
-        +default : Integer = 0 [1]
-        +hasInitialValue : Boolean = true [1]
+        +baseType : String [1]
+        +default : Integer [1]
+        +hasInitialValue : Boolean [1]
     }
+    Counter32 <|-- Counter64
     Counter32 <|-- ZeroBasedCounter32
+    Counter64 <|-- ZeroBasedCounter64
     Counter64 <|-- ZeroBasedCounter64
 ```
 

@@ -20,17 +20,17 @@ Gauge types model non-negative integers that may both increase and decrease in r
 classDiagram
     class Gauge32 {
         &lt;&lt;typedef&gt;&gt;
-        +baseType : String = "uint32" [1]
-        +maxValue : Integer = 4294967295 [1]
-        +minValue : Integer = 0 [1]
-        +latchesAtBounds : Boolean = true [1]
+        +baseType : String [1]
+        +maxValue : Integer [1]
+        +minValue : Integer [1]
+        +latchesAtBounds : Boolean [1]
     }
     class Gauge64 {
         &lt;&lt;typedef&gt;&gt;
-        +baseType : String = "uint64" [1]
-        +maxValue : Integer = 18446744073709551615 [1]
-        +minValue : Integer = 0 [1]
-        +latchesAtBounds : Boolean = true [1]
+        +baseType : String [1]
+        +maxValue : Integer [1]
+        +minValue : Integer [1]
+        +latchesAtBounds : Boolean [1]
     }
     Gauge32 &lt;|-- Gauge64
 ```

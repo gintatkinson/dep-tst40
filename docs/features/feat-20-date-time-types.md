@@ -19,35 +19,30 @@ This feature defines five typedefs for temporal values based on the ISO 8601 sta
 ```mermaid
 classDiagram
     class DateTime {
-        <<typedef>>
-        +baseType : String = "string" [1]
-        +standard : String = "ISO 8601 / RFC 3339 / RFC 9557" [1]
-        +allowsLeapSeconds : Boolean = true [1]
-        +allowsNegativeYears : Boolean = false [1]
-        +tzOffsetOptional : Boolean = true [1]
+        +baseType : String [1]
+        +standard : String [1]
+        +allowsLeapSeconds : Boolean [1]
+        +allowsNegativeYears : Boolean [1]
+        +tzOffsetOptional : Boolean [1]
     }
     class Date {
-        <<typedef>>
-        +baseType : String = "string" [1]
-        +granularity : String = "day" [1]
-        +tzOffsetOptional : Boolean = true [1]
+        +baseType : String [1]
+        +granularity : String [1]
+        +tzOffsetOptional : Boolean [1]
     }
     class DateNoZone {
-        <<typedef>>
-        +baseType : String = "date" [1]
-        +tzOffsetOptional : Boolean = false [1]
+        +baseType : String [1]
+        +tzOffsetOptional : Boolean [1]
     }
     class Time {
-        <<typedef>>
-        +baseType : String = "string" [1]
-        +allowsLeapSeconds : Boolean = true [1]
-        +tzOffsetOptional : Boolean = true [1]
-        +recurringDaily : Boolean = true [1]
+        +baseType : String [1]
+        +allowsLeapSeconds : Boolean [1]
+        +tzOffsetOptional : Boolean [1]
+        +recurringDaily : Boolean [1]
     }
     class TimeNoZone {
-        <<typedef>>
-        +baseType : String = "time" [1]
-        +tzOffsetOptional : Boolean = false [1]
+        +baseType : String [1]
+        +tzOffsetOptional : Boolean [1]
     }
     DateTime <|-- Date
     Date <|-- DateNoZone

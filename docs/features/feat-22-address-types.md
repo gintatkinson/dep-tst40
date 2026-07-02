@@ -20,21 +20,21 @@ Physical address types model media- or hardware-level addresses using colon-sepa
 classDiagram
     class PhysAddress {
         &lt;&lt;typedef&gt;&gt;
-        +baseType : String = "string" [1]
-        +format : String = "hex-octets-colon-separated" [1]
-        +variableLength : Boolean = true [1]
-        +canonicalCase : String = "lowercase" [1]
-        +smiEquivalent : String = "PhysAddress" [1]
+        +baseType : String [1]
+        +format : String [1]
+        +variableLength : Boolean [1]
+        +canonicalCase : String [1]
+        +smiEquivalent : String [1]
     }
     class MacAddress {
         &lt;&lt;typedef&gt;&gt;
-        +baseType : String = "string" [1]
-        +format : String = "hex-octets-colon-separated" [1]
-        +fixedLength : Integer = 6 [1]
-        +bitLength : Integer = 48 [1]
-        +standard : String = "IEEE 802" [1]
-        +canonicalCase : String = "lowercase" [1]
-        +smiEquivalent : String = "MacAddress" [1]
+        +baseType : String [1]
+        +format : String [1]
+        +fixedLength : Integer [1]
+        +bitLength : Integer [1]
+        +standard : String [1]
+        +canonicalCase : String [1]
+        +smiEquivalent : String [1]
     }
     PhysAddress &lt;|-- MacAddress
 ```

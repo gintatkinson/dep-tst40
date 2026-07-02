@@ -10,7 +10,7 @@ spec_source: "RFC 9911"
 # Feature: Define SNMP Temporal Types
 
 ## Parent Epic
-- [ ] #[EpicIssueID] - [ietf-yang-types: Common YANG Data Types](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-02-ietf-yang-types.md) (SNMP temporal types provide time-tick-based event tracking for the YANG type library)
+- [ ] #25 - [ietf-yang-types: Common YANG Data Types](https://github.com/gintatkinson/dep-tst40/blob/main/docs/epics/epic-02-ietf-yang-types.md) (SNMP temporal types provide time-tick-based event tracking for the YANG type library)
 
 ## Description
 This feature defines two YANG typedefs for representing time intervals and event timestamps in hundredths of a second modulo 2^32, equivalent to their SMIv2 counterparts. The `timeticks` type is a uint32-based type representing a non-negative integer that measures the time, modulo 2^32 (4294967296), in hundredths of a second between two reference epochs. When a schema node uses `timeticks`, its description MUST identify both reference epochs. At the maximum value of 4294967295, the next increment wraps the value to 0 after approximately 497 days. The `timestamp` type derives from `timeticks` and represents the value of an associated `timeticks` schema node instance at the moment a specific occurrence happened. The specific occurrence MUST be defined in the schema node description of any `timestamp` node. If the occurrence predates the last time the associated `timeticks` was zero, the `timestamp` value is zero. When the associated `timeticks` wraps at 497+ days, all `timestamp` values reset to zero. The types are semantically equivalent to SMIv2 TimeTicks and TimeStamp, respectively.
@@ -19,21 +19,19 @@ This feature defines two YANG typedefs for representing time intervals and event
 ```mermaid
 classDiagram
     class TimeTicks {
-        <<typedef>>
-        +baseType : String = "uint32" [1]
-        +unit : String = "centiseconds" [1]
-        +modulo : Integer = 4294967296 [1]
-        +wrapsAt : String = "497+ days" [1]
-        +requiresReferenceEpochs : Boolean = true [1]
-        +smiEquivalent : String = "TimeTicks" [1]
+        +baseType : String [1]
+        +unit : String [1]
+        +modulo : Integer [1]
+        +wrapsAt : String [1]
+        +requiresReferenceEpochs : Boolean [1]
+        +smiEquivalent : String [1]
     }
     class TimeStamp {
-        <<typedef>>
-        +baseType : String = "timeticks" [1]
-        +associatedTimeticksRequired : Boolean = true [1]
-        +zeroOnWrap : Boolean = true [1]
-        +zeroOnPredatingEvent : Boolean = true [1]
-        +smiEquivalent : String = "TimeStamp" [1]
+        +baseType : String [1]
+        +associatedTimeticksRequired : Boolean [1]
+        +zeroOnWrap : Boolean [1]
+        +zeroOnPredatingEvent : Boolean [1]
+        +smiEquivalent : String [1]
     }
     TimeTicks <|-- TimeStamp
 ```
