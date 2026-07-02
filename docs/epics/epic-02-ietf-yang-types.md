@@ -135,6 +135,7 @@ classDiagram
     EventRecorder --> SnmpGroup : records timestamps
     ProtocolTranslator --> YANGTypeRegistry : resolves
     ProtocolTranslator --> SMIv2TypeRegistry : maps
+    YANGTypeRegistry --> IetfYangTypes : registers
     TemporalClient --> TemporalValidator : validates
     TemporalValidator --> DateTimeParser : parses
     TemporalClient --> DateTimeGroup : validates against
