@@ -35,6 +35,7 @@ classDiagram
     }
     note for GeodeticSystem "geodeticDatum: pattern '[ -@\\[-\\^_-~]*', default 'wgs-84' when astronomicalBody = 'earth'\ncoordAccuracy: decimal64 fraction-digits 6\nheightAccuracy: decimal64 fraction-digits 6, units meters, not used with Cartesian coordinates"
     ReferenceFrame *-- "0..1" GeodeticSystem : contains
+    GeoLocation *-- ReferenceFrame : contains
 ```
 
 ## Interface Requirements
